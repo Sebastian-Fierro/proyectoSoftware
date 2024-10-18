@@ -1,17 +1,14 @@
 package com.ubb.proyecto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
 
 @Entity
-public class EventoCategoria {
+public class NoticiaCategoria {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_evento")
-    private Evento evento;
+    @JoinColumn(name = "id_noticia")
+    private Noticia noticia;
 
     @Id
     @ManyToOne
@@ -19,12 +16,12 @@ public class EventoCategoria {
     private Categoria categoria;
 
     // Getters y Setters
-    public Evento getEvento() {
-        return evento;
+    public Noticia getNoticia() {
+        return noticia;
     }
 
-    public void setEvento(Evento evento) {
-        this.evento = evento;
+    public void setNoticia(Noticia noticia) {
+        this.noticia = noticia;
     }
 
     public Categoria getCategoria() {
@@ -35,3 +32,4 @@ public class EventoCategoria {
         this.categoria = categoria;
     }
 }
+
