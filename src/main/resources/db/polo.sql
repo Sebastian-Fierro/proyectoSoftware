@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2024 a las 18:31:08
+-- Tiempo de generación: 29-10-2024 a las 03:42:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `polodesalud`
+-- Base de datos: `polo`
 --
 
 -- --------------------------------------------------------
@@ -83,6 +83,18 @@ CREATE TABLE `evento` (
 CREATE TABLE `eventocategoria` (
   `id_evento` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `externo_categoria`
+--
+
+CREATE TABLE `externo_categoria` (
+  `correo_externo` varchar(70) NOT NULL,
+  `id_categoria` int(11) NOT NULL,
+  `fecha_sub` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -304,6 +316,13 @@ ALTER TABLE `eventocategoria`
   ADD KEY `categoria_ev` (`id_categoria`);
 
 --
+-- Indices de la tabla `externo_categoria`
+--
+ALTER TABLE `externo_categoria`
+  ADD KEY `correo_externo` (`correo_externo`),
+  ADD KEY `idCat` (`id_categoria`);
+
+--
 -- Indices de la tabla `info_contact`
 --
 ALTER TABLE `info_contact`
@@ -484,6 +503,13 @@ ALTER TABLE `comentario`
 ALTER TABLE `eventocategoria`
   ADD CONSTRAINT `categoria_ev` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `evento` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `externo_categoria`
+--
+ALTER TABLE `externo_categoria`
+  ADD CONSTRAINT `correo_externo` FOREIGN KEY (`correo_externo`) REFERENCES `usuario_externo` (`correo`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `idCat` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `info_contact`
