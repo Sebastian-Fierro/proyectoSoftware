@@ -1,6 +1,7 @@
 package com.ubb.proyecto.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -14,6 +15,14 @@ public class UsuarioExterno {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha_sub;
+
+    @ManyToMany
+    @JoinTable(name = "externo_categoria", joinColumns = @JoinColumn(name = "correo_externo"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria"))
+    private List<Categoria> categoriasExt;
+
+    @OneToMany(mappedBy = "correo_externo")
+    private List<Comentario> comentarios;
 
     // Getters y Setters
     public String getCorreo() {

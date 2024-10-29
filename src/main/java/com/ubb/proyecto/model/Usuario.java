@@ -39,6 +39,14 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_mult"))
     private List<Multimedia> multimedia;
 
+    @ManyToMany(mappedBy = "usuarios")
+    private List<Evento> eventos;
+
+    @ManyToMany
+    @JoinTable(name = "usuarionoticia", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_noticia"))
+    private List<Noticia> noticias;
+
     // Getters y Setters
     public Integer getId_user() {
         return id_user;

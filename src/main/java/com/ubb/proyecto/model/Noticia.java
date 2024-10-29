@@ -30,6 +30,9 @@ public class Noticia {
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private List<Categoria> categoriaList;
 
+    @ManyToMany(mappedBy = "noticias")
+    private List<Usuario> usuariosList;
+
     // Getters y Setters
 
     public Integer getIdNoticia() {
