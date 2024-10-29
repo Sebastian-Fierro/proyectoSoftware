@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-10-2024 a las 20:23:37
+-- Tiempo de generación: 26-10-2024 a las 18:31:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -49,6 +49,18 @@ CREATE TABLE `comentario` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `componentes`
+--
+
+CREATE TABLE `componentes` (
+  `id_comp` int(11) NOT NULL,
+  `nombre` varchar(30) NOT NULL,
+  `descripción` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `evento`
 --
 
@@ -87,6 +99,19 @@ CREATE TABLE `info_contact` (
   `updated_by` int(11) NOT NULL,
   `instagram` text NOT NULL,
   `facebook` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `multimedia`
+--
+
+CREATE TABLE `multimedia` (
+  `id_mult` int(11) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `tipo` varchar(20) NOT NULL,
+  `url` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -189,12 +214,34 @@ CREATE TABLE `usuariocomentario` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `usuariocomponentes`
+--
+
+CREATE TABLE `usuariocomponentes` (
+  `id_user` int(11) NOT NULL,
+  `id_comp` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarioevento`
 --
 
 CREATE TABLE `usuarioevento` (
   `id_user` int(11) NOT NULL,
   `id_evento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuariomultimedia`
+--
+
+CREATE TABLE `usuariomultimedia` (
+  `id_user` int(11) NOT NULL,
+  `id_mult` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -238,6 +285,12 @@ ALTER TABLE `comentario`
   ADD KEY `comentario_externo` (`correo`);
 
 --
+-- Indices de la tabla `componentes`
+--
+ALTER TABLE `componentes`
+  ADD PRIMARY KEY (`id_comp`);
+
+--
 -- Indices de la tabla `evento`
 --
 ALTER TABLE `evento`
@@ -256,6 +309,12 @@ ALTER TABLE `eventocategoria`
 ALTER TABLE `info_contact`
   ADD PRIMARY KEY (`id_contact`),
   ADD KEY `infocontact_usuario` (`updated_by`);
+
+--
+-- Indices de la tabla `multimedia`
+--
+ALTER TABLE `multimedia`
+  ADD PRIMARY KEY (`id_mult`);
 
 --
 -- Indices de la tabla `noticia`
@@ -311,11 +370,25 @@ ALTER TABLE `usuariocomentario`
   ADD KEY `comentariogestiona` (`id_comentario`);
 
 --
+-- Indices de la tabla `usuariocomponentes`
+--
+ALTER TABLE `usuariocomponentes`
+  ADD KEY `idUsuarioCont` (`id_user`),
+  ADD KEY `idComp` (`id_comp`);
+
+--
 -- Indices de la tabla `usuarioevento`
 --
 ALTER TABLE `usuarioevento`
   ADD KEY `id_evento` (`id_evento`),
   ADD KEY `usuario_evento` (`id_user`);
+
+--
+-- Indices de la tabla `usuariomultimedia`
+--
+ALTER TABLE `usuariomultimedia`
+  ADD KEY `idUsuario` (`id_user`),
+  ADD KEY `idMult` (`id_mult`);
 
 --
 -- Indices de la tabla `usuarionoticia`
@@ -347,6 +420,12 @@ ALTER TABLE `comentario`
   MODIFY `id_comentario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `componentes`
+--
+ALTER TABLE `componentes`
+  MODIFY `id_comp` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `evento`
 --
 ALTER TABLE `evento`
@@ -357,6 +436,12 @@ ALTER TABLE `evento`
 --
 ALTER TABLE `info_contact`
   MODIFY `id_contact` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `multimedia`
+--
+ALTER TABLE `multimedia`
+  MODIFY `id_mult` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `noticia`
@@ -441,11 +526,25 @@ ALTER TABLE `usuariocomentario`
   ADD CONSTRAINT `usuariogestiona` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Filtros para la tabla `usuariocomponentes`
+--
+ALTER TABLE `usuariocomponentes`
+  ADD CONSTRAINT `idComp` FOREIGN KEY (`id_comp`) REFERENCES `componentes` (`id_comp`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `idUsuarioCont` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `usuarioevento`
 --
 ALTER TABLE `usuarioevento`
   ADD CONSTRAINT `id_evento` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `usuario_evento` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuariomultimedia`
+--
+ALTER TABLE `usuariomultimedia`
+  ADD CONSTRAINT `idMult` FOREIGN KEY (`id_mult`) REFERENCES `multimedia` (`id_mult`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `idUsuario` FOREIGN KEY (`id_user`) REFERENCES `usuario` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `usuarionoticia`
