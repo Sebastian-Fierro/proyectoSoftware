@@ -1,9 +1,10 @@
 package com.ubb.proyecto.model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 public class UsuarioExterno {
@@ -13,8 +14,7 @@ public class UsuarioExterno {
 
     private Integer nombre;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha_sub;
+    private LocalDateTime fecha;
 
     @ManyToMany
     @JoinTable(name = "externo_categoria", joinColumns = @JoinColumn(name = "correo_externo"),
@@ -40,4 +40,9 @@ public class UsuarioExterno {
     public void setNombre(Integer nombre) {
         this.nombre = nombre;
     }
+
+    public  LocalDateTime getFecha() {
+        return fecha;
+    }
+
 }
