@@ -29,6 +29,16 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_comentario"))
     private List<Comentario> comentarios;
 
+    @ManyToMany
+    @JoinTable(name = "usuariocomponentes", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_comp"))
+    private List<Componentes> componentes;
+
+    @ManyToMany
+    @JoinTable(name = "usuariomultimedia", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_mult"))
+    private List<Multimedia> multimedia;
+
     // Getters y Setters
     public Integer getId_user() {
         return id_user;

@@ -23,12 +23,13 @@ public class Comentario {
     @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
 
-    @ManyToOne //esta malo
-    @JoinColumn(name = "id_evento", nullable = false)
-    private Evento evento;
-
     @ManyToMany(mappedBy = "comentarios")
     private List<Usuario> usuarios;
+
+    @ManyToMany
+    @JoinTable(name = "eventocomentario", joinColumns = @JoinColumn(name = "id_comentario"),
+            inverseJoinColumns = @JoinColumn(name = "id_evento"))
+    private List<Evento> eventoList;
 
     // Getters y setters
     public int getIdComentario() {
@@ -63,12 +64,5 @@ public class Comentario {
         this.fecha = fecha;
     }
 
-    public Evento getEvento() {
-        return evento;
-    }
-
-    public void setEvento(Evento evento) {
-        this.evento = evento;
-    }
 }
 
