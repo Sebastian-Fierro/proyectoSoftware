@@ -1,7 +1,8 @@
 package com.ubb.proyecto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import java.sql.Date;
+
+import jakarta.persistence.*;
 
 @Entity
 public class UsuarioExterno {
@@ -10,6 +11,9 @@ public class UsuarioExterno {
     private String correo;
 
     private Integer nombre;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fecha_sub;
 
     // Getters y Setters
     public String getCorreo() {
