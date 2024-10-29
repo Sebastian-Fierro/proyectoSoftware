@@ -1,14 +1,9 @@
 package com.ubb.proyecto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "comentario")
@@ -28,9 +23,12 @@ public class Comentario {
     @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
 
-    @ManyToOne
+    @ManyToOne //esta malo
     @JoinColumn(name = "id_evento", nullable = false)
     private Evento evento;
+
+    @ManyToMany(mappedBy = "comentarios")
+    private List<Usuario> usuarios;
 
     // Getters y setters
     public int getIdComentario() {

@@ -2,6 +2,7 @@ package com.ubb.proyecto.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "noticia")
@@ -23,6 +24,11 @@ public class Noticia {
 
     @Column(name = "created_by", nullable = false)
     private Integer createdBy;
+
+    @ManyToMany
+    @JoinTable(name = "noticiacategoria", joinColumns = @JoinColumn(name = "id_noticia"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria"))
+    private List<Categoria> categoriaList;
 
     // Getters y Setters
 
