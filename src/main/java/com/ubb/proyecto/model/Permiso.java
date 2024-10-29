@@ -2,6 +2,8 @@ package com.ubb.proyecto.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "permisos")
 public class Permiso {
@@ -16,6 +18,9 @@ public class Permiso {
 
     @Column(name = "descripcion", nullable = false, columnDefinition = "TEXT")
     private String descripcion;
+
+    @ManyToMany(mappedBy = "permisos")
+    private List<Rol> rols;
 
     // Getters y Setters
 

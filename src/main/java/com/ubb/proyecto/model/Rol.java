@@ -2,6 +2,8 @@ package com.ubb.proyecto.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "rol")
 public class Rol {
@@ -13,6 +15,11 @@ public class Rol {
 
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
+
+    @ManyToMany
+    @JoinTable(name = "rolpermiso", joinColumns = @JoinColumn(name = "id_rol"),
+            inverseJoinColumns = @JoinColumn(name = "id_permiso"))
+    private List<Permiso> permisos;
 
     // Getters y Setters
 

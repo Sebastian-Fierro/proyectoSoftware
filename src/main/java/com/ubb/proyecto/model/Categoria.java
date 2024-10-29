@@ -1,11 +1,8 @@
 package com.ubb.proyecto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "categoria")
@@ -14,13 +11,19 @@ public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
-    private int idCategory;
+    private Integer idCategory;
 
     @Column(name = "nombre", nullable = false, length = 30)
     private String nombre;
 
+    @ManyToMany(mappedBy = "categoriaList")
+    private List<Noticia> noticiaList;
+
+    @ManyToMany(mappedBy = "categorias")
+    private List<Evento> eventos;
+
     // Getters y setters
-    public int getIdCategory() {
+    public Integer getIdCategory() {
         return idCategory;
     }
 

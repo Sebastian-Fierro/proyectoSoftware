@@ -2,6 +2,7 @@ package com.ubb.proyecto.model;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Usuario {
@@ -22,6 +23,11 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "rol_user")
     private Rol rol;
+
+    @ManyToMany
+    @JoinTable(name = "usuariocomentario", joinColumns = @JoinColumn(name = "id_usuario"),
+            inverseJoinColumns = @JoinColumn(name = "id_comentario"))
+    private List<Comentario> comentarios;
 
     // Getters y Setters
     public Integer getId_user() {
