@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2024 a las 03:42:06
+-- Tiempo de generación: 29-10-2024 a las 04:05:51
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -41,9 +41,8 @@ CREATE TABLE `categoria` (
 CREATE TABLE `comentario` (
   `id_comentario` int(11) NOT NULL,
   `descripción` varchar(200) NOT NULL,
-  `id_evento` int(11) NOT NULL,
-  `correo` varchar(70) NOT NULL,
-  `fecha` date NOT NULL
+  `fecha` date NOT NULL,
+  `correo_externo` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -83,6 +82,17 @@ CREATE TABLE `evento` (
 CREATE TABLE `eventocategoria` (
   `id_evento` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `eventocomentario`
+--
+
+CREATE TABLE `eventocomentario` (
+  `id_comentario` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -293,8 +303,7 @@ ALTER TABLE `categoria`
 --
 ALTER TABLE `comentario`
   ADD PRIMARY KEY (`id_comentario`),
-  ADD KEY `comentarioevento` (`id_evento`),
-  ADD KEY `comentario_externo` (`correo`);
+  ADD KEY `correoExt` (`correo_externo`);
 
 --
 -- Indices de la tabla `componentes`
@@ -314,6 +323,13 @@ ALTER TABLE `evento`
 ALTER TABLE `eventocategoria`
   ADD KEY `evento` (`id_evento`),
   ADD KEY `categoria_ev` (`id_categoria`);
+
+--
+-- Indices de la tabla `eventocomentario`
+--
+ALTER TABLE `eventocomentario`
+  ADD KEY `idComent` (`id_comentario`),
+  ADD KEY `idEvent` (`id_evento`);
 
 --
 -- Indices de la tabla `externo_categoria`
@@ -494,8 +510,7 @@ ALTER TABLE `usuario`
 -- Filtros para la tabla `comentario`
 --
 ALTER TABLE `comentario`
-  ADD CONSTRAINT `comentario_externo` FOREIGN KEY (`correo`) REFERENCES `usuario_externo` (`correo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `comentarioevento` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `correoExt` FOREIGN KEY (`correo_externo`) REFERENCES `usuario_externo` (`correo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `eventocategoria`
@@ -503,6 +518,13 @@ ALTER TABLE `comentario`
 ALTER TABLE `eventocategoria`
   ADD CONSTRAINT `categoria_ev` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id_category`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `evento` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `eventocomentario`
+--
+ALTER TABLE `eventocomentario`
+  ADD CONSTRAINT `idComent` FOREIGN KEY (`id_comentario`) REFERENCES `comentario` (`id_comentario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `idEvent` FOREIGN KEY (`id_evento`) REFERENCES `evento` (`id_evento`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `externo_categoria`
