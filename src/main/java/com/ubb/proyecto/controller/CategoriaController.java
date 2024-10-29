@@ -21,4 +21,6 @@ public class CategoriaController {
     public List<Categoria> list(){
         return categoriaService.getAllCategorias();
     }
+
+    
 }

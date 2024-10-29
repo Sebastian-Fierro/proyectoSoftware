@@ -1,6 +1,6 @@
 package com.ubb.proyecto.model;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 
@@ -12,8 +12,7 @@ public class UsuarioExterno {
 
     private Integer nombre;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fecha_sub;
+    private LocalDateTime fecha;
 
     // Getters y Setters
     public String getCorreo() {
@@ -31,4 +30,9 @@ public class UsuarioExterno {
     public void setNombre(Integer nombre) {
         this.nombre = nombre;
     }
+
+    public  LocalDateTime getFecha() {
+        return fecha;
+    }
+
 }
