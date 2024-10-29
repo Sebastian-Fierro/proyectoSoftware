@@ -2,6 +2,8 @@ package com.ubb.proyecto.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "componentes")
 public class Componentes {
@@ -16,6 +18,9 @@ public class Componentes {
 
     @Column(name = "descripción", nullable = false)
     private String descripcion;
+
+    @ManyToMany(mappedBy = "componentes")
+    private List<Usuario> usuarios;
 
     // Getters y Setters
 

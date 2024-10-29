@@ -34,6 +34,9 @@ public class Evento {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    @ManyToMany(mappedBy = "eventoList")
+    private List<Comentario> comentarios;
+
     @ManyToMany
     @JoinTable(name = "eventocategoria", joinColumns = @JoinColumn(name = "id_evento"),
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
