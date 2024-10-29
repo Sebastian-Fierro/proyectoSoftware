@@ -1,14 +1,11 @@
 package com.ubb.proyecto.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "evento")
@@ -36,6 +33,11 @@ public class Evento {
 
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+    @ManyToMany
+    @JoinTable(name = "eventocategoria", joinColumns = @JoinColumn(name = "id_evento"),
+            inverseJoinColumns = @JoinColumn(name = "id_categoria"))
+    private List<Categoria> categorias;
 
     // Getters y setters
     public int getIdEvento() {
