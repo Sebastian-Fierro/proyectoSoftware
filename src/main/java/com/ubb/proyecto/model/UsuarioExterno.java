@@ -20,7 +20,7 @@ public class UsuarioExterno {
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private List<Categoria> categoriasExt;
 
-    @OneToMany(mappedBy = "correo_externo") //revision
+    @OneToMany(mappedBy = "correo") //revision
     private List<Comentario> comentarios;
 
     // Getters y Setters

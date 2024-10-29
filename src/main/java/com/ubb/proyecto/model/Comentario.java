@@ -32,7 +32,7 @@ public class Comentario {
     private List<Evento> eventoList;
 
     @ManyToOne
-    @JoinColumn(name = "correo")
+    @JoinColumn(name = "correo_externo")
     private UsuarioExterno usuarioExterno;
 
     // Getters y setters
