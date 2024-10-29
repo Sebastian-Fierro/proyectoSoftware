@@ -21,7 +21,7 @@ public class Usuario {
     private Date created_at;
 
     @ManyToOne
-    @JoinColumn(name = "rol_user")
+    @JoinColumn(name = "id_rol")
     private Rol rol;
 
     @ManyToMany

@@ -21,6 +21,9 @@ public class Rol {
             inverseJoinColumns = @JoinColumn(name = "id_permiso"))
     private List<Permiso> permisos;
 
+    @OneToMany(mappedBy = "rol")
+    private List<Usuario> usuarios;
+
     // Getters y Setters
 
     public Integer getId_rol() {

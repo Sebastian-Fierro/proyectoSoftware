@@ -20,7 +20,7 @@ public class UsuarioExterno {
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private List<Categoria> categoriasExt;
 
-    @OneToMany(mappedBy = "correo_externo")
+    @OneToMany(mappedBy = "correo_externo") //revision
     private List<Comentario> comentarios;
 
     // Getters y Setters
@@ -44,4 +44,23 @@ public class UsuarioExterno {
         return fecha;
     }
 
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
+
+    public List<Categoria> getCategoriasExt() {
+        return categoriasExt;
+    }
+
+    public void setCategoriasExt(List<Categoria> categoriasExt) {
+        this.categoriasExt = categoriasExt;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
 }

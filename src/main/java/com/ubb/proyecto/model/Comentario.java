@@ -31,6 +31,10 @@ public class Comentario {
             inverseJoinColumns = @JoinColumn(name = "id_evento"))
     private List<Evento> eventoList;
 
+    @ManyToOne
+    @JoinColumn(name = "correo")
+    private UsuarioExterno usuarioExterno;
+
     // Getters y setters
     public int getIdComentario() {
         return idComentario;
