@@ -22,6 +22,9 @@ public class Categoria {
     @ManyToMany(mappedBy = "categorias")
     private List<Evento> eventos;
 
+    @ManyToMany(mappedBy = "categoriasExt")
+    private List<UsuarioExterno> usuarioExternos;
+
     // Getters y setters
     public Integer getIdCategory() {
         return idCategory;

@@ -1,4 +1,6 @@
 package com.ubb.proyecto.service;
+import com.ubb.proyecto.model.UsuarioExterno;
+import com.ubb.proyecto.repository.RepositorioUsuarioExterno;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ubb.proyecto.model.UsuarioExterno;
-import com.ubb.proyecto.repository.RepositorioUsuarioExterno;
+
 
 @Service
 public class UsuarioExternoService {
@@ -18,18 +19,13 @@ public class UsuarioExternoService {
         return usuarioExternoRepository.findAll();
     }
 
-    public Optional<UsuarioExterno> getUsuariosExternosById(Integer id) {
-        return usuarioExternoRepository.findById(id);
-    }
-
-
-    public UsuarioExterno saveUsuarioExterno(UsuarioExterno usuarioExterno) {
-        return usuarioExternoRepository.save(usuarioExterno);
+    public Optional<UsuarioExterno> getUsuariosExternosByCorreo(String correo) {
+        return usuarioExternoRepository.findById(correo);
     }
 
     // Actualiza Nombre
-    public UsuarioExterno updateUsuarioExterno(Integer id, UsuarioExterno usuarioExternoDetails){
-        UsuarioExterno usuarioExterno = usuarioExternoRepository.findById(id)
+    public UsuarioExterno updateUsuarioExterno(String correo, UsuarioExterno usuarioExternoDetails){
+        UsuarioExterno usuarioExterno = usuarioExternoRepository.findById(correo)
         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         usuarioExterno.setNombre(usuarioExternoDetails.getNombre());
@@ -37,9 +33,17 @@ public class UsuarioExternoService {
         return usuarioExternoRepository.save(usuarioExterno);
     }
 
-    public void deleteUsuarioExterno(Integer Id){
-        usuarioExternoRepository.deleteById(Id);
+    public void deleteUsuarioExterno(String correo){
+        usuarioExternoRepository.deleteById(correo);
+    }
+    
+    
+    public Optional<UsuarioExterno> getUsuariosExternosById(String correo) {
+        return usuarioExternoRepository.findById(correo);
     }
 
 
+    public UsuarioExterno saveUsuarioExterno(UsuarioExterno usuarioExterno) {
+        return usuarioExternoRepository.save(usuarioExterno);
+    }
 }

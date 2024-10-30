@@ -11,6 +11,26 @@ import java.util.List;
 @Table(name = "evento")
 public class Evento {
 
+    private Integer id;
+    private String nombre;
+
+
+    public Evento(Integer id, String nombre, String lugar, LocalTime horario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.lugar = lugar;
+        this.horario = horario;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_evento")
@@ -36,6 +56,11 @@ public class Evento {
 
     @ManyToMany(mappedBy = "eventoList")
     private List<Comentario> comentarios;
+
+    @ManyToMany
+    @JoinTable(name = "usuarioevento", joinColumns = @JoinColumn(name = "id_evento"),
+            inverseJoinColumns = @JoinColumn(name = "id_user"))
+    private List<Usuario> usuarios;
 
     @ManyToMany
     @JoinTable(name = "eventocategoria", joinColumns = @JoinColumn(name = "id_evento"),

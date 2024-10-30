@@ -7,6 +7,23 @@ import java.util.List;
 @Entity
 public class Usuario {
 
+    private Integer id;
+
+    // Constructor
+    public Usuario(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    // Getters y Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
@@ -21,7 +38,7 @@ public class Usuario {
     private Date created_at;
 
     @ManyToOne
-    @JoinColumn(name = "rol_user")
+    @JoinColumn(name = "id_rol")
     private Rol rol;
 
     @ManyToMany
@@ -38,6 +55,14 @@ public class Usuario {
     @JoinTable(name = "usuariomultimedia", joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_mult"))
     private List<Multimedia> multimedia;
+
+    @ManyToMany(mappedBy = "usuarios")
+    private List<Evento> eventos;
+
+    @ManyToMany
+    @JoinTable(name = "usuarionoticia", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_noticia"))
+    private List<Noticia> noticias;
 
     // Getters y Setters
     public Integer getId_user() {

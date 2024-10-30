@@ -23,6 +23,10 @@ public class RolService {
         return rolRepository.findById(id);
     }
 
+    public Rol saveRol(Rol rol) {
+        return rolRepository.save(rol); 
+    }
+    
     public Rol updateRol(Integer id, Rol rolDetails) {
         Rol rol = rolRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Rol no disponible"));

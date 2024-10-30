@@ -8,6 +8,32 @@ import java.util.List;
 @Table(name = "permisos")
 public class Permiso {
 
+    private Integer id;
+
+    // Constructor
+    public Permiso(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    // Getters y Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    // Opcional: Método toString para facilitar la visualización
+    @Override
+    public String toString() {
+        return "Permiso{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_permiso", nullable = false)
