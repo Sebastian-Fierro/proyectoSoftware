@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2024 a las 04:05:51
+-- Tiempo de generación: 30-10-2024 a las 19:52:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -31,6 +31,14 @@ CREATE TABLE `categoria` (
   `id_category` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id_category`, `nombre`) VALUES
+(1, 'charla'),
+(2, 'vacunacion');
 
 -- --------------------------------------------------------
 
@@ -285,7 +293,7 @@ CREATE TABLE `usuarionoticia` (
 
 CREATE TABLE `usuario_externo` (
   `correo` varchar(70) NOT NULL,
-  `nombre` int(11) NOT NULL
+  `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -446,7 +454,7 @@ ALTER TABLE `usuario_externo`
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `comentario`
