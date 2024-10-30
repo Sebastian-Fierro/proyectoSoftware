@@ -25,7 +25,7 @@ public class EventoService {
     }
 
     //Tengo dudas
-    public List<Evento> getEventoByLugar(String lugar) {
+    public List<Evento>getEventoByLugar(String lugar) {
         return eventoRepository.findByLugar(lugar);
     }
      //Tengo dudas
@@ -39,5 +39,4 @@ public class EventoService {
     public void deleteEvento(Integer id) {
         eventoRepository.deleteById(id);
     }
-
 }

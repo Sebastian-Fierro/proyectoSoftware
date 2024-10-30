@@ -15,7 +15,7 @@ public class PermisoService {
     @Autowired
     private RepositorioPermiso permisoRepository;
 
-    public List<Permiso> getAllPermiso() {
+    public List<Permiso> getAllPermisos() {
         return permisoRepository.findAll();
     }
 
