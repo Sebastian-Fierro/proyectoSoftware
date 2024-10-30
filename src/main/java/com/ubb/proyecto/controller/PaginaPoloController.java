@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class PaginaController {
+public class PaginaPoloController {
 
     @GetMapping("/")
     public String inicio() {
