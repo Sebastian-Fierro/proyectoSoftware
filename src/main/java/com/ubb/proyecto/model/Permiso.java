@@ -7,33 +7,6 @@ import java.util.List;
 @Entity
 @Table(name = "permisos")
 public class Permiso {
-
-    private Integer id;
-
-    // Constructor
-    public Permiso(Integer id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    // Opcional: Método toString para facilitar la visualización
-    @Override
-    public String toString() {
-        return "Permiso{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                '}';
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_permiso", nullable = false)
@@ -46,8 +19,15 @@ public class Permiso {
     private String descripcion;
 
     @ManyToMany(mappedBy = "permisos")
-    private List<Rol> rols;
+    private List<Rol> roles;
 
+    public Permiso(Integer idPermiso, String nombre) {
+        this.idPermiso = idPermiso;
+        this.nombre = nombre;
+    }
+
+    public Permiso() {
+    }
     // Getters y Setters
 
     public Integer getIdPermiso() {
@@ -72,6 +52,14 @@ public class Permiso {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public List<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Rol> rols) {
+        this.roles = rols;
     }
 }
 

@@ -31,12 +31,12 @@ public class RolController {
                        .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());//Si no, crea respuesta HTTP NOT FOUND
     }
 
-    /*
+
     @PostMapping
     public ResponseEntity<Rol> createRol(@RequestBody Rol rol) {
         Rol savedRol = rolService.saveRol(rol);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRol);
-    }*/
+    }
 
      @PutMapping("/{id}")
     public ResponseEntity<Rol> updateRol(@PathVariable Integer id, @RequestBody Rol rolDetails) {

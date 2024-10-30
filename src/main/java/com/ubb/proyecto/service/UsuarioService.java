@@ -37,6 +37,14 @@ public class UsuarioService {
 
         return usuarioRepository.save(usuario);
     }
+    public boolean tienePermisoParaEditarNoticias(int usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
+        if (usuario != null && usuario.getRol() != null) {
+            return usuario.getRol().getPermisos().stream()
+                    .anyMatch(permiso -> permiso.getNombre().equals("EDITAR_NOTICIAS"));
+        }
+        return false;
+    }
 
     public void deleteUsuario(Integer Id){
         usuarioRepository.deleteById(Id);
