@@ -7,6 +7,23 @@ import java.util.List;
 @Entity
 public class Usuario {
 
+    private Integer id;
+
+    // Constructor
+    public Usuario(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    // Getters y Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
