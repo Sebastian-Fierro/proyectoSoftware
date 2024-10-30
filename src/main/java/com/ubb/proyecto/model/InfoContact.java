@@ -8,6 +8,22 @@ import java.util.Date;
 @Entity
 public class InfoContact {
 
+    private Integer id;
+
+    // Constructor
+    public InfoContact(Integer id, String correo) {
+        this.id = id;
+        this.correo = correo;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_contact;
