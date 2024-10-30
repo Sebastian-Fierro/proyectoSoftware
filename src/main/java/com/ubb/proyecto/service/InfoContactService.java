@@ -11,7 +11,7 @@ import com.ubb.proyecto.repository.RepositorioInfoContact;
 
 @Service
 
-public class InfoContactoService {
+public class InfoContactService {
 
     @Autowired
     private RepositorioInfoContact infoContactRepository;

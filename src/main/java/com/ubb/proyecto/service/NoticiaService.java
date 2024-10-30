@@ -19,7 +19,7 @@ public class NoticiaService {
         return noticiaRepository.findAll();
     }
 
-    public Optional<Noticia> getNoticiaaById(Integer id) {
+    public Optional<Noticia> getNoticiaById(Integer id) {
         return noticiaRepository.findById(id);
     }
 
