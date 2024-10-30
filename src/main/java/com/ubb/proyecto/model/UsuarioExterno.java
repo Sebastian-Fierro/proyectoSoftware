@@ -7,8 +7,11 @@ import jakarta.persistence.*;
 
 @Entity
 public class UsuarioExterno {
-
+    
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+
     private String correo;
 
     private Integer nombre;
@@ -22,6 +25,10 @@ public class UsuarioExterno {
 
     @OneToMany(mappedBy = "correo") //revision
     private List<Comentario> comentarios;
+
+    public Long getId() {
+        return Id;
+    }
 
     // Getters y Setters
     public String getCorreo() {
