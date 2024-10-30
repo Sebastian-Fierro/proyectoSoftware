@@ -53,7 +53,7 @@ public class NoticiaServiceTests {
         when(noticiaRepository.findById(1)).thenReturn(Optional.of(noticia));
 
         // Act
-        Optional<Noticia> result = noticiaService.getNoticiaaById(1);
+        Optional<Noticia> result = noticiaService.getNoticiaById(1);
 
         // Assert
         assertTrue(result.isPresent());
@@ -67,7 +67,7 @@ public class NoticiaServiceTests {
         when(noticiaRepository.findById(1)).thenReturn(Optional.empty());
 
         // Act
-        Optional<Noticia> result = noticiaService.getNoticiaaById(1);
+        Optional<Noticia> result = noticiaService.getNoticiaById(1);
 
         // Assert
         assertFalse(result.isPresent());

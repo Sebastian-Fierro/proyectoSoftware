@@ -37,7 +37,7 @@ public class PermisoServiceTests {
         when(permisoRepository.findAll()).thenReturn(Arrays.asList(permiso1, permiso2));
 
         // Act
-        List<Permiso> result = permisoService.getAllPermiso();
+        List<Permiso> result = permisoService.getAllPermisos();
 
         // Assert
         assertNotNull(result);

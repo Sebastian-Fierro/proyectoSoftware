@@ -5,11 +5,11 @@ import com.ubb.proyecto.model.UsuarioExterno;
 import com.ubb.proyecto.service.UsuarioExternoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+/*import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;*/
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
+/*import java.util.Optional;*/
 
 @RestController
 @RequestMapping("/usuarioExterno")
@@ -22,6 +22,8 @@ public class UsuarioExternoController {
     public List <UsuarioExterno> getAllUsuariosExternos(){
         return usuarioExternoService.getAllUsuariosExternos();
     }
+    
+    /*
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioExterno> getUsuarioExternoById(@PathVariable Integer id){
@@ -55,4 +57,5 @@ public class UsuarioExternoController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+        */
 }

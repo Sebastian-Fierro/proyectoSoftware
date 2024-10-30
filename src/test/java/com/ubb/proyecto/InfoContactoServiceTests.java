@@ -2,7 +2,7 @@ package com.ubb.proyecto;
 
 import com.ubb.proyecto.model.InfoContact;
 import com.ubb.proyecto.repository.RepositorioInfoContact;
-import com.ubb.proyecto.service.InfoContactoService;
+import com.ubb.proyecto.service.InfoContactService;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class InfoContactoServiceTests {
     private RepositorioInfoContact infoContactRepository;
 
     @InjectMocks
-    private InfoContactoService infoContactoService;
+    private InfoContactService infoContactoService;
 
     @BeforeEach
     void setUp() {
