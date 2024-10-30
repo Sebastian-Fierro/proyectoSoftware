@@ -13,11 +13,34 @@ import com.ubb.proyecto.repository.RepositorioUsuarioExterno;
 public class UsuarioExternoService {
     @Autowired
     private RepositorioUsuarioExterno usuarioExternoRepository;
-
+//arreglado
     public List<UsuarioExterno> getAllUsuariosExternos(){
         return usuarioExternoRepository.findAll();
     }
 
+     public Optional<UsuarioExterno> getUsuariosExternosById(Long id) {
+        return usuarioExternoRepository.findById(id);
+    }
+
+
+    public UsuarioExterno saveUsuarioExterno(UsuarioExterno usuarioExterno) {
+        return usuarioExternoRepository.save(usuarioExterno);
+    }
+
+    // Actualiza Nombre
+    public UsuarioExterno updateUsuarioExterno(Long id, UsuarioExterno usuarioExternoDetails){
+        UsuarioExterno usuarioExterno = usuarioExternoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuarioExterno.setNombre(usuarioExternoDetails.getNombre());
+
+        return usuarioExternoRepository.save(usuarioExterno);
+    }
+
+    public void deleteUsuarioExterno(Long Id){
+        usuarioExternoRepository.deleteById(Id);
+    }
+    
     /*
     public Optional<UsuarioExterno> getUsuariosExternosById(Integer id) {
         return usuarioExternoRepository.findBy;
