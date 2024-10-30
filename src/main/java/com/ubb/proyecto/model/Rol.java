@@ -8,6 +8,31 @@ import java.util.List;
 @Table(name = "rol")
 public class Rol {
 
+    private Integer id;
+
+    // Constructor
+    public Rol(Integer id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
+    // Getters y Setters
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Rol{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                '}';
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rol", nullable = false)
