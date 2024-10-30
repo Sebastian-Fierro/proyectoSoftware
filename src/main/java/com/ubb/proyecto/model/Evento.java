@@ -11,6 +11,26 @@ import java.util.List;
 @Table(name = "evento")
 public class Evento {
 
+    private Integer id;
+    private String nombre;
+
+
+    public Evento(Integer id, String nombre, String lugar, LocalTime horario) {
+        this.id = id;
+        this.nombre = nombre;
+        this.lugar = lugar;
+        this.horario = horario;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_evento")
