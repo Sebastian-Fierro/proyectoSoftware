@@ -7,7 +7,35 @@ import java.util.List;
 @Entity
 @Table(name = "noticia")
 public class Noticia {
+    
+    private Integer id;
+    private String nombre;
 
+    // Constructor
+    public Noticia(Integer id, String nombre, String contenido) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contenido = contenido;
+    }
+
+    // Getters
+    public Integer getId() {
+        return id;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    // Setters 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_noticia", nullable = false)
