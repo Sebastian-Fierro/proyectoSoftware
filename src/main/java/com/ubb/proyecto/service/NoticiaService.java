@@ -27,16 +27,12 @@ public class NoticiaService {
         return noticiaRepository.save(noticia);
     }
 
-    /*  tengo dudas
-    public Noticia updateNoticia(Integer id, Noticia noticiaDetails) {
+    public void updateNoticia(Integer id, Noticia noticiaDetails) {
         Noticia noticia = noticiaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Noticia no encontrada"));
 
         noticia.setNombre(noticiaDetails.getNombre());
-
-        return categoriaRepository.save(categoria);
     }
-*/
     public void deleteNoticia(Integer id) {
         noticiaRepository.deleteById(id);
     }

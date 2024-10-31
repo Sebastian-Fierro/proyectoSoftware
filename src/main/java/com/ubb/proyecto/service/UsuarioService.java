@@ -28,7 +28,6 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    // Actualiza Nombre
     public Usuario updateUsuario(Integer id, Usuario usuarioDetails){
         Usuario usuario = usuarioRepository.findById(id)
         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -40,5 +39,13 @@ public class UsuarioService {
 
     public void deleteUsuario(Integer Id){
         usuarioRepository.deleteById(Id);
+    }
+
+    public Usuario autenticar(String correo, String contraseña) {
+        Usuario usuario = usuarioRepository.findByCorreo(correo);
+        if (usuario != null && usuario.getContraseña().equals(contraseña)) {
+            return usuario; // Usuario autenticado
+        }
+        return null; // Autenticación fallida
     }
 }
