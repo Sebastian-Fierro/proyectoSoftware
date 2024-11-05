@@ -40,7 +40,8 @@ public class UsuarioService {
     public boolean tienePermisoParaEditarNoticias(int usuarioId) {
         Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
         if (usuario != null && usuario.getRol() != null) {
-            return usuario.getRol().getPermisos().stream()
+            return usuario.getRol().getNombre().equalsIgnoreCase("administrador") &&
+                    usuario.getRol().getPermisos().stream()
                     .anyMatch(permiso -> permiso.getNombre().equals("EDITAR_NOTICIAS"));
         }
         return false;
@@ -58,5 +59,13 @@ public class UsuarioService {
         }
         return false;
     }
+    public boolean tienePermisoParaBorrarNoticias(int usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
+        if (usuario != null && usuario.getRol() != null) {
+            return usuario.getRol().getPermisos().stream().anyMatch(permiso -> permiso.getNombre().equals("BORRAR_NOTICIA"));
+        }
+        return false;
+    }
+
 
 }

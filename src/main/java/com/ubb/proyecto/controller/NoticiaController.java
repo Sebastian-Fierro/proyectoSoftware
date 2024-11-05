@@ -36,12 +36,6 @@ public class NoticiaController {
                        .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());//Si no, crea respuesta HTTP NOT FOUND
     }
 
-    @PostMapping
-    public ResponseEntity<Noticia> createNoticia(@RequestBody Noticia noticia) {
-        Noticia savedNoticia = noticiaService.saveNoticia(noticia);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedNoticia);
-    }
-
     @PostMapping("/crear")
     public ResponseEntity<String> crearNoticia(@RequestBody Noticia noticia, @RequestParam int usuarioId) {
         if (!usuarioService.tienePermisoParaCrearNoticias(usuarioId)) {
@@ -58,14 +52,20 @@ public class NoticiaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteNoticia(@PathVariable Integer id) {
-        try {
-            noticiaService.deleteNoticia(id);
-            return ResponseEntity.noContent().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<String> eliminarNoticia(@PathVariable int id, @RequestParam int usuarioId) {
+        if (!usuarioService.tienePermisoParaBorrarNoticias(usuarioId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No tienes permiso para borrar noticias.");
+        }
+
+        Noticia noticiaExistente = repositorioNoticia.findById(id).orElse(null);
+        if (noticiaExistente != null) {
+            repositorioNoticia.delete(noticiaExistente);
+            return ResponseEntity.ok("Noticia borrada con éxito.");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Noticia no encontrada.");
         }
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<String> editarNoticia(@PathVariable int id, @RequestBody Noticia noticia, @RequestParam int usuarioId) {
         if (!usuarioService.tienePermisoParaEditarNoticias(usuarioId)) {
