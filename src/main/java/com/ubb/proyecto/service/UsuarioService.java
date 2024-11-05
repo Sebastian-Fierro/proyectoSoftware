@@ -49,4 +49,14 @@ public class UsuarioService {
     public void deleteUsuario(Integer Id){
         usuarioRepository.deleteById(Id);
     }
+
+    public boolean tienePermisoParaCrearNoticias(int usuarioId) {
+        Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
+        if (usuario != null && usuario.getRol() != null) {
+            return usuario.getRol().getPermisos().stream()
+                            .anyMatch(permiso -> permiso.getNombre().equals("CREAR_NOTICIA"));
+        }
+        return false;
+    }
+
 }

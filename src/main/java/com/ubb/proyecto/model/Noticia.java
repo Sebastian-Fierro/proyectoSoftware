@@ -21,9 +21,6 @@ public class Noticia {
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @Column(name = "created_by", nullable = false)
-    private Integer createdBy;
-
     @ManyToMany
     @JoinTable(name = "noticiacategoria", joinColumns = @JoinColumn(name = "id_noticia"),
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
@@ -31,6 +28,11 @@ public class Noticia {
 
     @ManyToMany(mappedBy = "noticias")
     private List<Usuario> usuariosList;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
     public Noticia(Integer idNoticia, String titulo, String contenido) {
         this.idNoticia = idNoticia;
@@ -72,14 +74,6 @@ public class Noticia {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
     }
 
     public List<Categoria> getCategoriaList() {
