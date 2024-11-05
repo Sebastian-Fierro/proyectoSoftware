@@ -44,15 +44,33 @@ public class CategoriaServiceTests {
     }
 
     @Test
-    void testGetCategoriaById() {
-        Categoria categoria = new Categoria();
-        categoria.setNombre("Categoria 1");
+    public void testGetCategoriaById_CategoriaExiste() {
+        // Arrange
+        Integer id = 1;
+        Categoria categoria = new Categoria(id, "Tecnología");
+        when(categoriaRepository.findById(id)).thenReturn(Optional.of(categoria));
 
-        when(categoriaRepository.findById(1)).thenReturn(Optional.of(categoria));
+        // Act
+        Categoria result = categoriaService.getCategoriaById(id);
 
-        Optional<Categoria> result = categoriaService.getCategoriaById(1);
-        assertTrue(result.isPresent());
-        assertEquals("Categoria 1", result.get().getNombre());
+        // Assert
+        assertNotNull(result);
+        assertEquals(categoria, result);
+    }
+
+    @Test
+    public void testGetCategoriaById_CategoriaNoExiste() {
+        // Arrange
+        Integer id = 2;
+        when(categoriaRepository.findById(id)).thenReturn(Optional.empty());
+
+        // Act & Assert
+        RuntimeException exception = assertThrows(RuntimeException.class, () -> {
+            categoriaService.getCategoriaById(id);
+        });
+
+        // Assert
+        assertEquals("Categoria no encontrada", exception.getMessage());
     }
 
     @Test

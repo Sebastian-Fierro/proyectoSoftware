@@ -10,7 +10,6 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_category")
     private Integer idCategory;
 
     @Column(name = "nombre", nullable = false, length = 30)
@@ -24,6 +23,29 @@ public class Categoria {
 
     @ManyToMany(mappedBy = "categoriasExt")
     private List<UsuarioExterno> usuarioExternos;
+
+    
+    //Constructir vacio
+    public Categoria() {
+    }
+
+    //Constructor con datos de la propia clase
+    public Categoria(Integer idCategory, String nombre) {
+        this.idCategory = idCategory;
+        this.nombre = nombre;
+    }
+
+    //Constructor con datos de la propia clase + relaciones
+    public Categoria(Integer idCategory, String nombre, List<Noticia> noticiaList, List<Evento> eventos,
+            List<UsuarioExterno> usuarioExternos) {
+        this.idCategory = idCategory;
+        this.nombre = nombre;
+        this.noticiaList = noticiaList;
+        this.eventos = eventos;
+        this.usuarioExternos = usuarioExternos;
+    }
+
+
 
     // Getters y setters
     public Integer getIdCategory() {
