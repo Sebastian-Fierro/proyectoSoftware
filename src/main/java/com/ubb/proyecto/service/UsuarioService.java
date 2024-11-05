@@ -34,6 +34,8 @@ public class UsuarioService {
         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         usuario.setNombre(usuarioDetails.getNombre());
+        usuario.setCorreo(usuarioDetails.getCorreo());
+        usuario.setContraseña(usuarioDetails.getContraseña());
 
         return usuarioRepository.save(usuario);
     }
