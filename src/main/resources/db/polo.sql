@@ -343,7 +343,7 @@ ALTER TABLE `externo_categoria`
 --
 ALTER TABLE `info_contact`
   ADD PRIMARY KEY (`id_contact`),
-  ADD KEY `infocontact_usuario` (`updated_by`);
+  ADD KEY `infocontact_usuario` (`updated_by`); --forania mia que vincule las respuestas al html
 
 --
 -- Indices de la tabla `multimedia`

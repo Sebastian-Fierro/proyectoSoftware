@@ -1,7 +1,6 @@
 package com.ubb.proyecto.service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class InfoContactService {
     public InfoContact updateInfoContact(Integer id, InfoContact InfoContactDetails) {
         InfoContact infoContact = infoContactRepository.findById(id).orElseThrow(
             () -> new RuntimeException("Contacto no encontrado"));
-            //infoContact.setUpdated_at(new Date());  // Asignar la fecha actual, tira error
+            infoContact.setUpdated_at(new Date());  // Asignar la fecha actual
 
         infoContact.setCorreo(InfoContactDetails.getCorreo());
         infoContact.setTelefono(InfoContactDetails.getTelefono());

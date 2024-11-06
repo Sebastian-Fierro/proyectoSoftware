@@ -11,7 +11,8 @@ import com.ubb.proyecto.model.InfoContact;
 import com.ubb.proyecto.service.InfoContactService;
 
 import java.util.Optional;
-
+//ingresar una opcion de contacto
+//clave foranea tiene un int rol user
 @RestController
 @RequestMapping("/infoContacto")
 public class InfoContactController {
@@ -33,6 +34,10 @@ public class InfoContactController {
 
     @PostMapping
     public ResponseEntity<InfoContact> createInfoContact(@RequestBody InfoContact infoContact){
+                //para validar que exista el usuario, no creo que sea necesario 
+        /*if (infoContact.getUsuario() == null || infoContact.getUsuario().getId_user() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }*/ 
         InfoContact savedInfoContact = infoContactService.saveInfoContact((infoContact));
         return ResponseEntity.status(HttpStatus.CREATED).body(savedInfoContact);
     }
@@ -47,7 +52,7 @@ public class InfoContactController {
         }
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteInfoContact(@PathVariable Integer id) {
         try {
             infoContactService.deleteInfoContact((id));
