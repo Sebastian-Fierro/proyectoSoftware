@@ -18,6 +18,10 @@ public class CategoriaService {
         return repositorio.findAll();
     }
 
+    public boolean existCategoriaById(int id) {
+        return repositorio.existsById(id);
+    }
+
     public Optional <Categoria> getCategoriaById(Integer id) {
         Optional <Categoria> categoriaOptional = repositorio.findById(id);
         return categoriaOptional;
@@ -46,5 +50,7 @@ public class CategoriaService {
             throw new RuntimeException("Categoria no encontrada");
         }
     }
+
+    
 }
 

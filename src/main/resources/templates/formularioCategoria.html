@@ -4,29 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabla</title>
-    <link rel="stylesheet" href="tabla.css">
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="estiloFormulario.css">
+    <title>Formulario</title>
 </head>
 <body>
-    <table id="tabla">
-        <thead>
-          <tr>
-            <th colspan="6">Películas</th>
-          </tr>
-          <tr>
-            <th>#</th>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Género</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
-      <div id="formulario">
-      <h1>Modificación de Películas</h1>
+    <h1>Registro de Categoría</h1>
     <div class="formbold-main-wrapper">
         <div class="formbold-form-wrapper">
           <form>
@@ -34,45 +16,21 @@
                 <div>
                     <input
                     type="text"
-                    name="titulo"
-                    id="titulo"
-                    placeholder="Película"
+                    name="nombre"
+                    id="nombre"
+                    placeholder="Ingrese nombre de la categoría"
                     class="formbold-form-input"
                     />
-                    <label for="titulo" class="formbold-form-label"> Título </label>
-                </div>
-                <div>
-                    <input
-                    type="text"
-                    name="director"
-                    id="director"
-                    placeholder="Spielberg"
-                    class="formbold-form-input"
-                    />
-                    <label for="director" class="formbold-form-label"> Director </label>
+                    <label for="nombre" class="formbold-form-label"> Nombre categoría </label>
                 </div>
               </div>
       
-              <div class="formbold-input-flex">
-                <div>
-                    <input
-                    type="text"
-                    name="genero"
-                    id="genero"
-                    placeholder="Drama"
-                    class="formbold-form-input"
-                    />
-                    <label for="genero" class="formbold-form-label"> Género </label>
-                </div>
-              </div>
-      
-              <button class="formbold-btn" id="btnModificar">
-                  Modificar Película
+              <button class="formbold-btn" id="btnregistrar">
+                  Registrar
               </button>
           </form>
         </div>
       </div>
-      </div>
-      <script src="tabla.js"></script>
+      <script src="formularioCategoria.js"></script>
 </body>
 </html>
