@@ -63,6 +63,9 @@ public class Usuario {
     @JoinTable(name = "usuarionoticia", joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_noticia"))
     private List<Noticia> noticias;
+    
+    @OneToOne(mappedBy = "usuario")
+    private InfoContact infoContact; 
 
     // Getters y Setters
     public Integer getId_user() {

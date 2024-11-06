@@ -6,40 +6,52 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "infocontact")
 public class InfoContact {
-
-    private Integer id;
-
-    // Constructor
-    public InfoContact(Integer id, String correo) {
-        this.id = id;
-        this.correo = correo;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_contact", nullable = false)
     private Integer id_contact;
-
+    @Column(name = "correo", nullable = false, length = 100)
     private String correo;
-
+    @Column(name = "telefono", nullable = false)
     private Integer telefono;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "updated_at", nullable = false)
     private Date updated_at;
 
+    /*@ManyToOne
+    @JoinColumn(name = "updated_by", referencedColumnName = "id_user")
+    private Usuario updatedBy;
+    segun gpt esto es para identificar que usuario lo modifico, por eso es many y no one ya que muchos podrian actualizarlo y no
+    exclusivamente uno    lo de abajo es la version anterior*/ 
+    
+    @Column(name = "updated_at", nullable = false)
     private Integer updated_by;
-
+    
+    @Column(name = "instagram", nullable = false, length = 100)
     private String instagram;
-
+    @Column(name = "facebook", nullable = false, length = 100)
     private String facebook;
+
+    @OneToOne
+    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
+    private Usuario usuario;
+
+    public InfoContact() {}
+
+    public InfoContact(Integer id_contact, String correo, Integer telefono, Date updated_at, Integer updated_by, String instagram, String facebook) {
+        this.id_contact = id_contact;
+        this.correo = correo;
+        this.telefono = telefono;
+        this.updated_at = updated_at;
+        this.updated_by = updated_by; // Ahora acepta un objeto Usuario
+        this.instagram = instagram;
+        this.facebook = facebook;
+    }
+    
 
     // Getters y Setters
     public Integer getId_contact() {
@@ -96,5 +108,17 @@ public class InfoContact {
 
     public void setFacebook(String facebook) {
         this.facebook = facebook;
+    }
+
+    @Override
+    public int hashCode() {
+        // TODO Auto-generated method stub
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // TODO Auto-generated method stub
+        return super.equals(obj);
     }
 }
