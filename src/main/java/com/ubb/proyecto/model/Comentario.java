@@ -8,33 +8,10 @@ import java.util.List;
 @Entity
 @Table(name = "comentario")
 public class Comentario {
-    
-    private Integer id;
-    private String texto;
 
-    // Constructor
-    public Comentario(Integer id, String texto) {
-        this.id = id;
-        this.texto = texto;
-    }
 
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comentario")
@@ -61,7 +38,16 @@ public class Comentario {
     @JoinColumn(name = "correo_externo")
     private UsuarioExterno usuarioExterno;
 
-    // Getters y setters
+    public Comentario(int idComentario, String descripcion) {
+        this.idComentario = idComentario;
+        this.descripcion = descripcion;
+    }
+
+    public Comentario() {
+
+    }
+// Getters y setters
+
     public int getIdComentario() {
         return idComentario;
     }
@@ -94,5 +80,28 @@ public class Comentario {
         this.fecha = fecha;
     }
 
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
+    public List<Evento> getEventoList() {
+        return eventoList;
+    }
+
+    public void setEventoList(List<Evento> eventoList) {
+        this.eventoList = eventoList;
+    }
+
+    public UsuarioExterno getUsuarioExterno() {
+        return usuarioExterno;
+    }
+
+    public void setUsuarioExterno(UsuarioExterno usuarioExterno) {
+        this.usuarioExterno = usuarioExterno;
+    }
 }
 

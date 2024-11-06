@@ -22,6 +22,10 @@ public class Evento {
         this.horario = horario;
     }
 
+    public Evento() {
+
+    }
+
     public Integer getId() {
         return id;
     }
@@ -46,10 +50,7 @@ public class Evento {
     private LocalTime horario;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private Timestamp createdAt;
-
-    @Column(name = "created_by", nullable = false)
-    private int createdBy;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
@@ -66,6 +67,11 @@ public class Evento {
     @JoinTable(name = "eventocategoria", joinColumns = @JoinColumn(name = "id_evento"),
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private List<Categoria> categorias;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
     // Getters y setters
     public int getIdEvento() {
@@ -100,20 +106,12 @@ public class Evento {
         this.horario = horario;
     }
 
-    public Timestamp getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public int getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(int createdBy) {
-        this.createdBy = createdBy;
     }
 
     public LocalDateTime getUpdatedAt() {

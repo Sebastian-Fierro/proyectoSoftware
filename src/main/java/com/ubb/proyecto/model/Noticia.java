@@ -7,35 +7,6 @@ import java.util.List;
 @Entity
 @Table(name = "noticia")
 public class Noticia {
-    
-    private Integer id;
-    private String nombre;
-
-    // Constructor
-    public Noticia(Integer id, String nombre, String contenido) {
-        this.id = id;
-        this.nombre = nombre;
-        this.contenido = contenido;
-    }
-
-    // Getters
-    public Integer getId() {
-        return id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    // Setters 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_noticia", nullable = false)
@@ -50,9 +21,6 @@ public class Noticia {
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
-    @Column(name = "created_by", nullable = false)
-    private Integer createdBy;
-
     @ManyToMany
     @JoinTable(name = "noticiacategoria", joinColumns = @JoinColumn(name = "id_noticia"),
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
@@ -61,7 +29,20 @@ public class Noticia {
     @ManyToMany(mappedBy = "noticias")
     private List<Usuario> usuariosList;
 
-    // Getters y Setters
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+
+    public Noticia(Integer idNoticia, String titulo, String contenido) {
+        this.idNoticia = idNoticia;
+        this.titulo = titulo;
+        this.contenido = contenido;
+    }
+// Getters y Setters
+
+    public Noticia() {
+    }
 
     public Integer getIdNoticia() {
         return idNoticia;
@@ -95,11 +76,19 @@ public class Noticia {
         this.createdAt = createdAt;
     }
 
-    public Integer getCreatedBy() {
-        return createdBy;
+    public List<Categoria> getCategoriaList() {
+        return categoriaList;
     }
 
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
+    public void setCategoriaList(List<Categoria> categoriaList) {
+        this.categoriaList = categoriaList;
+    }
+
+    public List<Usuario> getUsuariosList() {
+        return usuariosList;
+    }
+
+    public void setUsuariosList(List<Usuario> usuariosList) {
+        this.usuariosList = usuariosList;
     }
 }

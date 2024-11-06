@@ -1,6 +1,5 @@
 package com.ubb.proyecto.controller;
 
-import java.util.List;
 import com.ubb.proyecto.model.Usuario;
 import com.ubb.proyecto.service.UsuarioService;
 
@@ -9,26 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
-
-    @GetMapping ("")
-    public List <Usuario> getAllUsuarios(){
-        return usuarioService.getAllUsuarios();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id){
-        Optional<Usuario> usuario = usuarioService.getUsuariosById(id);
-        return usuario.map(ResponseEntity::ok)
-                        .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    }
 
     @PostMapping
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario){

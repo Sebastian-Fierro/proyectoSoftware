@@ -7,32 +7,6 @@ import java.util.List;
 @Entity
 @Table(name = "rol")
 public class Rol {
-
-    private Integer id;
-
-    // Constructor
-    public Rol(Integer id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "Rol{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                '}';
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rol", nullable = false)
@@ -49,14 +23,21 @@ public class Rol {
     @OneToMany(mappedBy = "rol")
     private List<Usuario> usuarios;
 
-    // Getters y Setters
+    public Rol(Integer id_rol, String nombre) {
+        this.id_rol = id_rol;
+        this.nombre = nombre;
+    }
 
+    public Rol() {
+    }
+
+    // Getters y Setters
     public Integer getId_rol() {
         return id_rol;
     }
 
-    public void setId_rol(Integer idRol) {
-        this.id_rol = idRol;
+    public void setId_rol(Integer id_rol) {
+        this.id_rol = id_rol;
     }
 
     public String getNombre() {
@@ -65,6 +46,22 @@ public class Rol {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public List<Permiso> getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 }
 

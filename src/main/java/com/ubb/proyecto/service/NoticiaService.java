@@ -27,12 +27,16 @@ public class NoticiaService {
         return noticiaRepository.save(noticia);
     }
 
-    public void updateNoticia(Integer id, Noticia noticiaDetails) {
+    public Noticia updateNoticia(Integer id, Noticia noticiaDetails) {
         Noticia noticia = noticiaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Noticia no encontrada"));
 
-        noticia.setNombre(noticiaDetails.getNombre());
+        noticia.setTitulo(noticiaDetails.getTitulo());
+        noticia.setContenido(noticiaDetails.getContenido());
+
+        return noticiaRepository.save(noticia);
     }
+
     public void deleteNoticia(Integer id) {
         noticiaRepository.deleteById(id);
     }

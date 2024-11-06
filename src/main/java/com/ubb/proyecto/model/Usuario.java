@@ -6,24 +6,6 @@ import java.util.List;
 
 @Entity
 public class Usuario {
-
-    private Integer id;
-
-    // Constructor
-    public Usuario(Integer id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
@@ -38,7 +20,7 @@ public class Usuario {
     private Date created_at;
 
     @ManyToOne
-    @JoinColumn(name = "id_rol")
+    @JoinColumn(name = "rol_user")
     private Rol rol;
 
     @ManyToMany
@@ -64,7 +46,11 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_noticia"))
     private List<Noticia> noticias;
 
+    public Usuario() {
+    }
+
     // Getters y Setters
+
     public Integer getId_user() {
         return id_user;
     }
@@ -111,5 +97,45 @@ public class Usuario {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public List<Componentes> getComponentes() {
+        return componentes;
+    }
+
+    public void setComponentes(List<Componentes> componentes) {
+        this.componentes = componentes;
+    }
+
+    public List<Multimedia> getMultimedia() {
+        return multimedia;
+    }
+
+    public void setMultimedia(List<Multimedia> multimedia) {
+        this.multimedia = multimedia;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
+
+    public List<Noticia> getNoticias() {
+        return noticias;
+    }
+
+    public void setNoticias(List<Noticia> noticias) {
+        this.noticias = noticias;
     }
 }
