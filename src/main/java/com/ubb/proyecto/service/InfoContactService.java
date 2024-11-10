@@ -31,14 +31,14 @@ public class InfoContactService {
     public InfoContact updateInfoContact(Integer id, InfoContact InfoContactDetails) {
         InfoContact infoContact = infoContactRepository.findById(id).orElseThrow(
             () -> new RuntimeException("Contacto no encontrado"));
-            infoContact.setUpdated_at(new Date());  // Asignar la fecha actual
+            //infoContact.setUpdated_at(new Date());  // Asignar la fecha actual
 
         infoContact.setCorreo(InfoContactDetails.getCorreo());
-        infoContact.setTelefono(InfoContactDetails.getTelefono());
+        /*infoContact.setTelefono(InfoContactDetails.getTelefono());
         infoContact.setUpdated_at(InfoContactDetails.getUpdated_at());
         infoContact.setUpdated_by(InfoContactDetails.getUpdated_by());
         infoContact.setInstagram(InfoContactDetails.getInstagram());
-        infoContact.setFacebook(InfoContactDetails.getFacebook());
+        infoContact.setFacebook(InfoContactDetails.getFacebook());*/
 
         return infoContactRepository.save(infoContact);
     }

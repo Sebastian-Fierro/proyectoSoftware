@@ -27,19 +27,28 @@ public class InfoContactController {
 
     @GetMapping("/{id}")
     public ResponseEntity<InfoContact> getInfoContactById(@PathVariable Integer id){
+        try{
         Optional<InfoContact> infoContacto = infoContactService.getInfoContactById(id);
         return infoContacto.map(ResponseEntity::ok)
                         .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+        }catch(Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PostMapping
-    public ResponseEntity<InfoContact> createInfoContact(@RequestBody InfoContact infoContact){
+    public ResponseEntity<?> createInfoContact(@RequestBody InfoContact infoContact){
                 //para validar que exista el usuario, no creo que sea necesario 
         /*if (infoContact.getUsuario() == null || infoContact.getUsuario().getId_user() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }*/ 
+        }*/
+        try{ 
         InfoContact savedInfoContact = infoContactService.saveInfoContact((infoContact));
         return ResponseEntity.status(HttpStatus.CREATED).body(savedInfoContact);
+        }catch(Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar InfoContact: " + e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
