@@ -1,10 +1,9 @@
 package com.ubb.proyecto.service;
+import com.ubb.proyecto.model.*;
+import com.ubb.proyecto.repository.RepositorioCategoria;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.ubb.proyecto.model.*;
-import com.ubb.proyecto.repository.RepositorioCategoria;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,31 +12,45 @@ import java.util.Optional;
 public class CategoriaService {
 
     @Autowired
-    private RepositorioCategoria categoriaRepository;
-
+    private RepositorioCategoria repositorio;
+ 
     public List<Categoria> getAllCategorias() {
-        return categoriaRepository.findAll();
+        return repositorio.findAll();
     }
 
-    public Optional<Categoria> getCategoriaById(Integer id) {
-        return categoriaRepository.findById(id);
+    public boolean existCategoriaById(int id) {
+        return repositorio.existsById(id);
+    }
+
+    public Optional <Categoria> getCategoriaById(Integer id) {
+        Optional <Categoria> categoriaOptional = repositorio.findById(id);
+        return categoriaOptional;
     }
 
     public Categoria saveCategoria(Categoria categoria) {
-        return categoriaRepository.save(categoria);
+        return repositorio.save(categoria);
     }
 
     public Categoria updateCategoria(Integer id, Categoria categoriaDetails) {
-        Categoria categoria = categoriaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria no encontrada"));
-
-        categoria.setNombre(categoriaDetails.getNombre());
-
-        return categoriaRepository.save(categoria);
+        Optional<Categoria> categoriaOptional = repositorio.findById(id);
+        if (categoriaOptional.isPresent()) {
+            Categoria categoria = categoriaOptional.get();
+            categoria.setNombre(categoriaDetails.getNombre());
+            return repositorio.save(categoria);
+        } else {
+            throw new RuntimeException("Categoria no encontrada");
+        }
     }
 
     public void deleteCategoria(Integer id) {
-        categoriaRepository.deleteById(id);
+        Optional<Categoria> categoriaOptional = repositorio.findById(id);
+        if (categoriaOptional.isPresent()) {
+            repositorio.deleteById(id);
+        } else {
+            throw new RuntimeException("Categoria no encontrada");
+        }
     }
+
+    
 }
 

@@ -1,24 +1,29 @@
 package com.ubb.proyecto.controller;
 
 import java.util.List;
+import com.ubb.proyecto.model.InfoContact;
+import com.ubb.proyecto.model.Usuario;
+//import com.ubb.proyecto.repository.RepositorioInfoContact;
+import com.ubb.proyecto.service.InfoContactService;
 
+//import com.ubb.proyecto.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.ubb.proyecto.model.InfoContact;
-import com.ubb.proyecto.service.InfoContactService;
-
 import java.util.Optional;
-//ingresar una opcion de contacto
-//clave foranea tiene un int rol user
+
 @RestController
 @RequestMapping("/infoContacto")
 public class InfoContactController {
 
     @Autowired
     private InfoContactService infoContactService;
+    @Autowired
+    /*private UsuarioService usuarioService;
+    @Autowired
+    private RepositorioInfoContact repositorioInfoContact;*/
 
     @GetMapping("")
     public List<InfoContact> getAllInfoContacts(){
@@ -27,28 +32,18 @@ public class InfoContactController {
 
     @GetMapping("/{id}")
     public ResponseEntity<InfoContact> getInfoContactById(@PathVariable Integer id){
-        try{
         Optional<InfoContact> infoContacto = infoContactService.getInfoContactById(id);
         return infoContacto.map(ResponseEntity::ok)
                         .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-        }catch(Exception e){
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
     }
 
-    @PostMapping
-    public ResponseEntity<?> createInfoContact(@RequestBody InfoContact infoContact){
-                //para validar que exista el usuario, no creo que sea necesario 
-        /*if (infoContact.getUsuario() == null || infoContact.getUsuario().getId_user() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }*/
-        try{ 
+    @PostMapping("/insert/{id_user}")
+    public ResponseEntity<InfoContact> createInfoContact(@PathVariable Integer id_user,@RequestBody InfoContact infoContact){
+            Usuario usuario = usuarioService.findById(id_user)
+        .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    infoContact.setUsuario(usuario);
         InfoContact savedInfoContact = infoContactService.saveInfoContact((infoContact));
         return ResponseEntity.status(HttpStatus.CREATED).body(savedInfoContact);
-        }catch(Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar InfoContact: " + e.getMessage());
-        }
     }
 
     @PutMapping("/{id}")
@@ -61,7 +56,7 @@ public class InfoContactController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/id")
     public ResponseEntity<Void> deleteInfoContact(@PathVariable Integer id) {
         try {
             infoContactService.deleteInfoContact((id));

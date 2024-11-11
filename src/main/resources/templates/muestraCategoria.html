@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista categorías</title>
+    <link rel="stylesheet" href="estiloFormulario.css">
+    <link rel="stylesheet" href="estiloMuestraCategoria.css">
+</head>
+<body>
+    <table id="tabla">
+        <thead>
+          <tr>
+            <th colspan="6">Categorías</th>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+      <div id="formulario">
+      <h1>Modificación de Categoría</h1>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+          <form>
+              <div class="formbold-input-flex">
+                <div>
+                    <input
+                    type="text"
+                    name="nombre"
+                    id="nombre"
+                    placeholder="Ingrese nuevo nombre de categoría"
+                    class="formbold-form-input"
+                    />
+                    <label for="nombre" class="formbold-form-label"> Nombre </label>
+                </div>
+      
+              <button class="formbold-btn" id="btnModificar">
+                  Modificar
+              </button>
+          </form>
+        </div>
+      </div>
+      </div>
+      <script src="muestraCategoria.js"></script>
+</body>
+</html>

@@ -6,14 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ubb.proyecto.model.InfoContact;
+import com.ubb.proyecto.model.Usuario;
 import com.ubb.proyecto.repository.RepositorioInfoContact;
 
 @Service
-
 public class InfoContactService {
-
     @Autowired
     private RepositorioInfoContact infoContactRepository;
+    @Autowired
+    private UsuarioService usuarioService; 
+
 
     public List<InfoContact> getAllInfoContacts(){
         return infoContactRepository.findAll();
@@ -23,22 +25,31 @@ public class InfoContactService {
         return infoContactRepository.findById(id);
     }
 
-    public InfoContact saveInfoContact(InfoContact infoContact) {
+    public InfoContact saveInfoContact(InfoContact infoContact, Integer id_user){
+        Usuario usuario = usuarioService.getUsuariosById(id_user).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        infoContact.setcambio(usuario);
+        return infoContactRepository.save(infoContact);
+    }
+
+    public InfoContact createInfoContact(InfoContact infoContact, Integer id_user) {
+        // Obtiene el usuario por ID
+        Usuario usuario = usuarioService.getUsuariosById(id_user)
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Asigna el usuario al objeto InfoContact
+        infoContact.setUsuario(usuario);
+
+        // Guarda el objeto InfoContact en la base de datos
         return infoContactRepository.save(infoContact);
     }
 
    //Solo actualiza correo?
     public InfoContact updateInfoContact(Integer id, InfoContact InfoContactDetails) {
-        InfoContact infoContact = infoContactRepository.findById(id).orElseThrow(
-            () -> new RuntimeException("Contacto no encontrado"));
-            //infoContact.setUpdated_at(new Date());  // Asignar la fecha actual
+        InfoContact infoContact = infoContactRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Contacto no encontrado"));
 
         infoContact.setCorreo(InfoContactDetails.getCorreo());
-        /*infoContact.setTelefono(InfoContactDetails.getTelefono());
-        infoContact.setUpdated_at(InfoContactDetails.getUpdated_at());
-        infoContact.setUpdated_by(InfoContactDetails.getUpdated_by());
-        infoContact.setInstagram(InfoContactDetails.getInstagram());
-        infoContact.setFacebook(InfoContactDetails.getFacebook());*/
+
 
         return infoContactRepository.save(infoContact);
     }

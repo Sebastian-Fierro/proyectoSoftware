@@ -3,26 +3,11 @@ package com.ubb.proyecto.model;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
+import com.fasterxml.jackson.annotation.*;
 
 @Entity
+@Table(name = "usuario")
 public class Usuario {
-
-    private Integer id;
-
-    // Constructor
-    public Usuario(Integer id, String nombre) {
-        this.id = id;
-        this.nombre = nombre;
-    }
-
-    // Getters y Setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,7 +23,8 @@ public class Usuario {
     private Date created_at;
 
     @ManyToOne
-    @JoinColumn(name = "id_rol")
+    @JoinColumn(name = "rol_user")
+    @JsonManagedReference
     private Rol rol;
 
     @ManyToMany
@@ -65,7 +51,15 @@ public class Usuario {
     private List<Noticia> noticias;
     
     @OneToOne(mappedBy = "usuario")
-    private InfoContact infoContact; 
+    private InfoContact infoContact;
+
+    public Usuario() {}
+    public Usuario(Integer id_user, String nombre, String contraseña, String correo) {
+        this.id_user = id_user;
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.correo = correo;
+    }
 
     // Getters y Setters
     public Integer getId_user() {
