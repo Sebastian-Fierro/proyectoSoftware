@@ -38,10 +38,10 @@ public class InfoContactController {
     }
 
     @PostMapping("/insert/{id_user}")
-    public ResponseEntity<InfoContact> createInfoContact(@PathVariable Integer id_user,@RequestBody InfoContact infoContact){
-            Usuario usuario = usuarioService.findById(id_user)
+    public ResponseEntity<InfoContact> createInfoContact(/*@PathVariable Integer id_user,*/@RequestBody InfoContact infoContact){
+            /*Usuario usuario = usuarioService.findById(id_user)
         .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-    infoContact.setUsuario(usuario);
+    infoContact.setUsuario(usuario);*/
         InfoContact savedInfoContact = infoContactService.saveInfoContact((infoContact));
         return ResponseEntity.status(HttpStatus.CREATED).body(savedInfoContact);
     }

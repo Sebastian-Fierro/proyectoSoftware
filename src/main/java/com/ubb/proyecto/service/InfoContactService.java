@@ -16,7 +16,6 @@ public class InfoContactService {
     @Autowired
     private UsuarioService usuarioService; 
 
-
     public List<InfoContact> getAllInfoContacts(){
         return infoContactRepository.findAll();
     }
@@ -25,13 +24,13 @@ public class InfoContactService {
         return infoContactRepository.findById(id);
     }
 
-    public InfoContact saveInfoContact(InfoContact infoContact, Integer id_user){
-        Usuario usuario = usuarioService.getUsuariosById(id_user).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        infoContact.setcambio(usuario);
+    public InfoContact saveInfoContact(InfoContact infoContact/*, Integer id_user*/){
+        /*Usuario usuario = usuarioService.getUsuariosById(id_user).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        infoContact.setcambio(usuario);*/
         return infoContactRepository.save(infoContact);
     }
 
-    public InfoContact createInfoContact(InfoContact infoContact, Integer id_user) {
+    /*public InfoContact createInfoContact(InfoContact infoContact, Integer id_user) {
         // Obtiene el usuario por ID
         Usuario usuario = usuarioService.getUsuariosById(id_user)
             .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
@@ -41,7 +40,7 @@ public class InfoContactService {
 
         // Guarda el objeto InfoContact en la base de datos
         return infoContactRepository.save(infoContact);
-    }
+    }*/
 
    //Solo actualiza correo?
     public InfoContact updateInfoContact(Integer id, InfoContact InfoContactDetails) {
