@@ -39,7 +39,7 @@ public class InfoContact {
     @Column(name = "facebook", nullable = false, length = 100)
     private String facebook;
 
-    @OneToOne
+    @OneToOne //------------------------------cambiar por updated_by deberia de ser asi---------------------------------
     @JoinColumn(name = "id_user", referencedColumnName = "id_user")
     private Usuario usuario;
 
