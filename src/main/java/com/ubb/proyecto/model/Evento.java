@@ -56,11 +56,11 @@ public class Evento {
 
     @ManyToMany(mappedBy = "eventoList")
     private List<Comentario> comentarios;
-
+/*
     @ManyToMany
     @JoinTable(name = "usuarioevento", joinColumns = @JoinColumn(name = "id_evento"),
             inverseJoinColumns = @JoinColumn(name = "id_user"))
-    private List<Usuario> usuarios;
+    private List<Usuario> usuarios;*/
 
     @ManyToMany
     @JoinTable(name = "eventocategoria", joinColumns = @JoinColumn(name = "id_evento"),

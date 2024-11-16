@@ -1,5 +1,6 @@
 package com.ubb.proyecto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class Permiso {
     private String descripcion;
 
     @ManyToMany(mappedBy = "permisos")
+    @JsonIgnore
     private List<Rol> roles;
 
     public Permiso(Integer idPermiso, String nombre) {

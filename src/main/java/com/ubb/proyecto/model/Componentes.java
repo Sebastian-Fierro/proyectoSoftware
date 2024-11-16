@@ -18,10 +18,10 @@ public class Componentes {
 
     @Column(name = "descripción", nullable = false)
     private String descripcion;
-
+/*
     @ManyToMany(mappedBy = "componentes")
     private List<Usuario> usuarios;
-
+*/
     // Getters y Setters
 
     public int getIdComp() {
