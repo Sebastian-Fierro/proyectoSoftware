@@ -50,7 +50,7 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_noticia"))
     private List<Noticia> noticias;
     
-    @OneToOne(mappedBy = "usuario")
+    @OneToOne(mappedBy = "updated_by")
     private InfoContact infoContact;
 
     public Usuario() {}
