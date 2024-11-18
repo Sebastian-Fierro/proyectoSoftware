@@ -12,7 +12,7 @@ public class InfoContact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_contact", nullable = false)
-    private Integer id_contact;
+    private Integer idContact;
 
     @Column(name = "correo", nullable = false, length = 100)
     private String correo;
@@ -49,23 +49,23 @@ public class InfoContact {
 
     public InfoContact() {}
 
-    public InfoContact(Integer id_contact, String correo, Integer telefono, Date updated_at, Usuario updated_by, String instagram, String facebook) {
-        this.id_contact = id_contact;
+    public InfoContact(Integer idContact, String correo, Integer telefono, Date updated_at, Usuario updated_by, String instagram, String facebook) {
+        this.idContact = idContact;
         this.correo = correo;
         this.telefono = telefono;
         this.updated_at = updated_at;
-        this.updated_by = updated_by; // Ahora acepta un objeto Usuario
+        this.updated_by = updated_by; 
         this.instagram = instagram;
         this.facebook = facebook;
     }
     
     // Getters y Setters
-    public Integer getId_contact() {
-        return id_contact;
+    public Integer getIdContact() {
+        return idContact;
     }
 
-    public void setId_contact(Integer id_contact) {
-        this.id_contact = id_contact;
+    public void setId_contact(Integer idContact) {
+        this.idContact = idContact;
     }
 
     public String getCorreo() {
