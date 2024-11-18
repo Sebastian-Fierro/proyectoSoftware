@@ -61,15 +61,17 @@ public class InfoContactService {
 
     public InfoContact updateInfoContact(Integer id, InfoContact newInfoContact) {
         InfoContact existingContact = infoContactRepository.findById(id).orElseThrow(() -> new RuntimeException("InfoContact no encontrado."));
+        
+        if (newInfoContact.getUpdated_by() != null) {
+            Usuario updatedBy = usuarioService.getUsuariosById(newInfoContact.getUpdated_by().getId_user())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
+            existingContact.setUpdated_by(updatedBy);
+        }
         existingContact.setCorreo(newInfoContact.getCorreo());
         existingContact.setTelefono(newInfoContact.getTelefono());
         existingContact.setInstagram(newInfoContact.getInstagram());
         existingContact.setFacebook(newInfoContact.getFacebook());
-        //existingContact.setUpdated_by(newInfoContact.getUpdated_by()); comentaod xq está lo de abajo
-
-        if (newInfoContact.getUpdated_by() != null) {
-            existingContact.setUpdated_by(newInfoContact.getUpdated_by());
-        }
+        //existingContact.setUpdated_by(newInfoContact.getUpdated_by()); comentado porque está lo de arriba
         return infoContactRepository.save(existingContact);
     }
 

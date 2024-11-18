@@ -58,20 +58,23 @@ public class InfoContactController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity</*InfoContact*/?> updateInfoContact(@PathVariable Integer id, @RequestBody InfoContact infoContactDetails){
-        
-        Optional<InfoContact> existingContact = infoContactService.getSingleInfoContact();
 
+        if (infoContactDetails.getUpdated_by() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'updated_by' está ausente.");
+        }
+        
+        if (infoContactDetails.getUpdated_by().getId_user() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'id_user' dentro de 'updated_by' está ausente.");
+        }
+
+        Optional<InfoContact> existingContact = infoContactService.getSingleInfoContact();
         if (existingContact.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un registro de InfoContact para actualizar.");
         }
-
-        if (infoContactDetails.getUpdated_by() == null || infoContactDetails.getUpdated_by().getId_user() == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'updated_by' o 'id_user' está ausente.");
-        }
         
-        Usuario Updated_by = usuarioService.getUsuariosById(infoContactDetails.getUpdated_by().getId_user()).orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
+        Usuario updatedBy = usuarioService.getUsuariosById(infoContactDetails.getUpdated_by().getId_user()).orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
 
-        infoContactDetails.setUpdated_by(Updated_by);
+        infoContactDetails.setUpdated_by(updatedBy);
 
         InfoContact updatedContact = infoContactService.updateInfoContact(existingContact.get().getIdContact(), infoContactDetails);
     
