@@ -60,4 +60,21 @@ public class CategoriaRestControllerTest {
         assertEquals(HttpStatus.OK.value(), response.getStatus());
         assertEquals(jsonCategoria.write(categoria).getJson(), response.getContentAsString());
     }
+
+    @Test
+    void siInvocoGetCategoriaConUnIdYNoExisteUnaCategoriaConEseIdDebeDevolverStatusNotFound() throws Exception {
+        // Given
+        given(servicio.getCategoriaById(1)).willReturn(Optional.empty());
+
+        // When
+        MockHttpServletResponse response = mockMvc.perform(get("/categorias/1")
+                .accept(MediaType.APPLICATION_JSON))
+                .andReturn()
+                .getResponse();
+
+        // Then
+        assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
+    }
+
+    
 }
