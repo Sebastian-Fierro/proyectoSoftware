@@ -36,17 +36,11 @@ public class InfoContactService {
         return infoContactRepository.save(infoContact);
     }
 
-    /*public InfoContact createInfoContact(InfoContact infoContact, Integer id_user) {
-        // Obtiene el usuario por ID
-        Usuario usuario = usuarioService.getUsuariosById(id_user)
-            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        // Asigna el usuario al objeto InfoContact
-        infoContact.setUsuario(usuario);
-
-        // Guarda el objeto InfoContact en la base de datos
+    public InfoContact createInfoContact(InfoContact infoContact, Integer id_user) {
+        Usuario usuario = usuarioService.getUsuariosById(id_user).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        infoContact.setUpdated_by(usuario);
         return infoContactRepository.save(infoContact);
-    }*/
+    }
 
    //Solo actualiza correo?
     /*public InfoContact updateInfoContact(Integer id, InfoContact InfoContactDetails) {

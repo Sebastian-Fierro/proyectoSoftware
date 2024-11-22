@@ -91,7 +91,7 @@ public class InfoContactController {
         }*/
     }
 
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteInfoContact(@PathVariable Integer id) {
         try {
             infoContactService.deleteInfoContact((id));
