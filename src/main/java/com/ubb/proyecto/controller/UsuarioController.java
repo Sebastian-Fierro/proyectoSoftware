@@ -8,12 +8,27 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @GetMapping("/")
+    public List<Usuario> getAllUsuarios() {
+        return usuarioService.getAllUsuarios();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id) {
+        Optional<Usuario> usuario = usuarioService.getUsuariosById(id);
+        return usuario.map(ResponseEntity::ok) // Si se encuentra un usuario, se devuelve una respuesta con código 200
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build()); // Si no, se devuelve código 404
+    }
 
     @PostMapping
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario){
