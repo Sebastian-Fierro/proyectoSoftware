@@ -1,9 +1,19 @@
 package com.ubb.proyecto.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id_user"
+)
 @Entity
 public class Usuario {
     @Id
@@ -21,9 +31,10 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "rol_user")
+    @JsonIgnore
     private Rol rol;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(name = "usuariocomentario", joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_comentario"))
     private List<Comentario> comentarios;
@@ -40,11 +51,10 @@ public class Usuario {
 
     @ManyToMany(mappedBy = "usuarios")
     private List<Evento> eventos;
-
-    @ManyToMany
-    @JoinTable(name = "usuarionoticia", joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_noticia"))
-    private List<Noticia> noticias;
+*/
+    @ManyToMany(mappedBy = "usuarios")
+    @JsonBackReference
+    private Set<Noticia> noticias = new HashSet<>();
 
     public Usuario() {
     }
@@ -98,7 +108,7 @@ public class Usuario {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-
+/*
     public List<Comentario> getComentarios() {
         return comentarios;
     }
@@ -130,12 +140,12 @@ public class Usuario {
     public void setEventos(List<Evento> eventos) {
         this.eventos = eventos;
     }
-
-    public List<Noticia> getNoticias() {
+*/
+    public Set<Noticia> getNoticias() {
         return noticias;
     }
 
-    public void setNoticias(List<Noticia> noticias) {
+    public void setNoticias(Set<Noticia> noticias) {
         this.noticias = noticias;
     }
 }
