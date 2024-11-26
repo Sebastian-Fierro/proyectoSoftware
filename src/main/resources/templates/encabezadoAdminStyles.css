@@ -45,6 +45,15 @@ header {
     color: #2325a7;
 }
 
+.item a {
+    text-decoration: none;
+    color: white;
+}
+
+.item a:hover {
+    color: #2325a7;
+}
+
 #menu{
     display: none;
 }
