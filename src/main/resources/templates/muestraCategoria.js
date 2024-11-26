@@ -2,7 +2,7 @@ window.onload = function(){
     listarCategorias();
 };
 
-//OBTIENE PELICULAS
+//OBTIENE CATEGORIAS
 let listarCategorias = async()=>{
     const peticion = await fetch("http://localhost:8080/categorias",
     {

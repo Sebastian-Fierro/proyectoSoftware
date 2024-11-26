@@ -40,4 +40,15 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @CrossOrigin
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> loginUsuario(@RequestBody Usuario usuario) {
+        Usuario loggedUsuario = usuarioService.loginUsuario(usuario);
+        if (loggedUsuario != null) {
+            return ResponseEntity.ok(loggedUsuario);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
 }

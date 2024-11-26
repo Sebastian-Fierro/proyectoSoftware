@@ -68,5 +68,7 @@ public class UsuarioService {
         return false;
     }
 
-
+    public Usuario loginUsuario(Usuario usuario) {
+        return usuarioRepository.findByCorreoAndContraseña(usuario.getCorreo(), usuario.getContraseña());
+    }
 }
