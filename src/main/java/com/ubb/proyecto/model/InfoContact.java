@@ -32,7 +32,7 @@ public class InfoContact {
 
     @OneToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id_user")
-    //@JsonIgnore
+    //@JsonIgnore creo que generaba un error
     private Usuario updated_by;
 
     @PrePersist

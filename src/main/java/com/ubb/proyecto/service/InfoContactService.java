@@ -20,12 +20,12 @@ public class InfoContactService {
         return infoContactRepository.findAll();
     }
 
-    /*public Optional<InfoContact> getInfoContactById(Integer id) {
+    public Optional<InfoContact> getInfoContactById(Integer id) {
         return infoContactRepository.findById(id);
-    }*/
-    public Optional<InfoContact> getSingleInfoContact() {
-        return infoContactRepository.findFirstByOrderByIdContactAsc();
     }
+    /*public Optional<InfoContact> getSingleInfoContact() {
+        return infoContactRepository.findFirstByOrderByIdContactAsc();
+    }*/
 
     public InfoContact saveInfoContact(InfoContact infoContact/*, Integer id_user*/){
         /*Usuario usuario = usuarioService.getUsuariosById(id_user).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));

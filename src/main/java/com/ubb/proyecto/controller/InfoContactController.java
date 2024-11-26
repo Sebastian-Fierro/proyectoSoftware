@@ -22,8 +22,6 @@ public class InfoContactController {
     private InfoContactService infoContactService;
     @Autowired
     private UsuarioService usuarioService;
-    @Autowired
-    private RepositorioInfoContact repositorioInfoContact;
 
     @GetMapping("")
     public List<InfoContact> getAllInfoContacts(){
@@ -32,7 +30,7 @@ public class InfoContactController {
 
     @GetMapping("/{id}")
     public ResponseEntity<InfoContact> /*getInfoContactById*/getSingleInfoContact(@PathVariable Integer id){
-        Optional<InfoContact> infoContacto = infoContactService./*getInfoContactById(id)*/getSingleInfoContact();
+        Optional<InfoContact> infoContacto = infoContactService.getInfoContactById(id)/*getSingleInfoContact()*/;
         return infoContacto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
@@ -41,8 +39,12 @@ public class InfoContactController {
         //InfoContact createdInfoContact = infoContactService.createInfoContact(infoContact); definir createInfoContact en service pa k funcione
         //return new ResponseEntity<>(createdInfoContact, HttpStatus.CREATED);
         
-        Optional<InfoContact> existingContact = infoContactService.getSingleInfoContact();
-
+        //Optional<InfoContact> existingContact = infoContactService.getSingleInfoContact();
+        Optional<InfoContact> existingContact = infoContactService.getInfoContactById(infoContact.getIdContact());
+        if (existingContact.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe un registro de InfoContact. Solo puedes actualizarlo.");
+        }
+        
         if (existingContact.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe un registro de InfoContact. Solo puedes actualizarlo.");
         }
@@ -56,10 +58,10 @@ public class InfoContactController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedInfoContact);*/
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity</*InfoContact*/?> updateInfoContact(@PathVariable Integer id, @RequestBody InfoContact infoContactDetails){
+    //@PutMapping("/update/{id}")
+    //public ResponseEntity</*InfoContact*/?> updateInfoContact(@PathVariable Integer id, @RequestBody InfoContact infoContactDetails){
 
-        if (infoContactDetails.getUpdated_by() == null) {
+      /*  if (infoContactDetails.getUpdated_by() == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'updated_by' está ausente.");
         }
         
@@ -67,16 +69,25 @@ public class InfoContactController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'id_user' dentro de 'updated_by' está ausente.");
         }
 
-        Optional<InfoContact> existingContact = infoContactService.getSingleInfoContact();
-        if (existingContact.isEmpty()) {
+        Optional<InfoContact> existingContactOpt = infoContactService.getInfoContactById(id);
+        if (existingContactOpt.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un registro de InfoContact para actualizar.");
         }
-        
+        InfoContact existingContact = existingContactOpt.get();
+
         Usuario updatedBy = usuarioService.getUsuariosById(infoContactDetails.getUpdated_by().getId_user()).orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
 
-        infoContactDetails.setUpdated_by(updatedBy);
+        existingContact.setCorreo(infoContactDetails.getCorreo());
+        existingContact.setTelefono(infoContactDetails.getTelefono());
+        existingContact.setInstagram(infoContactDetails.getInstagram());
+        existingContact.setFacebook(infoContactDetails.getFacebook());
+        existingContact.setUpdated_by(updatedBy);
+    
+        // Guardar cambios
+        InfoContact updatedContact = infoContactService.saveInfoContact(existingContact);
 
-        InfoContact updatedContact = infoContactService.updateInfoContact(existingContact.get().getIdContact(), infoContactDetails);
+        //infoContactDetails.setUpdated_by(updatedBy); //probar updated_by
+        //InfoContact updatedContact = infoContactService.updateInfoContact(existingContact.get().getIdContact(), infoContactDetails);
     
         return ResponseEntity.ok(updatedContact);
         
@@ -89,7 +100,42 @@ public class InfoContactController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }*/
+    //agregar cierre de llave
+    //gpt copilot
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> updateInfoContact(@PathVariable Integer id, @RequestBody InfoContact infoContactDetails) {
+    try {
+        if (infoContactDetails.getUpdated_by() == null || infoContactDetails.getUpdated_by().getId_user() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'updated_by' o 'id_user' está ausente.");
+        }
+
+        Optional<InfoContact> existingContactOpt = infoContactService.getInfoContactById(id);
+        if (existingContactOpt.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un registro de InfoContact para actualizar.");
+        }
+
+        InfoContact existingContact = existingContactOpt.get();
+
+        Usuario updatedBy = usuarioService.getUsuariosById(infoContactDetails.getUpdated_by().getId_user())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
+
+        existingContact.setCorreo(infoContactDetails.getCorreo());
+        existingContact.setTelefono(infoContactDetails.getTelefono());
+        existingContact.setInstagram(infoContactDetails.getInstagram());
+        existingContact.setFacebook(infoContactDetails.getFacebook());
+        existingContact.setUpdated_by(updatedBy);
+
+        InfoContact updatedContact = infoContactService.saveInfoContact(existingContact);
+
+        return ResponseEntity.ok(updatedContact);
+
+    } catch (IllegalArgumentException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    } catch (RuntimeException e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error interno del servidor: " + e.getMessage());
     }
+}
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteInfoContact(@PathVariable Integer id) {
