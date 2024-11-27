@@ -3,7 +3,7 @@ package com.ubb.proyecto.model;
 import jakarta.persistence.*;
 
 import java.util.Date;
-import com.fasterxml.jackson.annotation.*;
+//import com.fasterxml.jackson.annotation.*; habilitarlo provoca error 400 en postman
 
 @Entity
 @Table(name = "info_contact")
@@ -32,7 +32,7 @@ public class InfoContact {
 
     @OneToOne
     @JoinColumn(name = "updated_by", referencedColumnName = "id_user")
-    //@JsonIgnore creo que generaba un error
+    //@JsonIgnore habilitarlo provoca error 400 en postman
     private Usuario updated_by;
 
     @PrePersist

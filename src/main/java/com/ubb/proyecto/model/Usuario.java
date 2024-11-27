@@ -24,7 +24,7 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "rol_user")
-    @JsonManagedReference
+    //@JsonManagedReference provoca errror 415 en infocontact
     private Rol rol;
 
     @ManyToMany

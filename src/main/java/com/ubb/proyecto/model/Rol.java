@@ -18,7 +18,7 @@ public class Rol {
     @ManyToMany
     @JoinTable(name = "rolpermiso", joinColumns = @JoinColumn(name = "id_rol"),
             inverseJoinColumns = @JoinColumn(name = "id_permiso"))
-    @JsonManagedReference        
+    //@JsonManagedReference  provoca errror 415 en infocontact      
     private List<Permiso> permisos;
 
     @OneToMany(mappedBy = "rol")
@@ -66,4 +66,3 @@ public class Rol {
         this.usuarios = usuarios;
     }
 }
-
