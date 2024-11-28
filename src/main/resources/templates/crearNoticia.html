@@ -19,12 +19,9 @@
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            
-            
             height: 100vh;
         }
         .form-container {
-
             background: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -70,30 +67,33 @@
         .success {
             color: green;
         }
+        .cuerpo{
+            width: 500px; /* centrar */
+            margin: 50px auto; /* centrar */
+        }
     </style>
 
     
 </head>
 <body>
-    <br/>
-    <br/>
-<div class="form-container">
-    <h1>Crear Noticia</h1>
-    <form id="crearNoticiaForm">
-        <label for="titulo">Título</label>
-        <input type="text" id="titulo" name="titulo" required>
+<div class="cuerpo">
+    <div class="form-container">
+        <h1>Crear Noticia</h1>
+        <form id="crearNoticiaForm">
+            <label for="titulo">Título</label>
+            <input type="text" id="titulo" name="titulo" required>
 
-        <label for="contenido">Contenido</label>
-        <textarea id="contenido" name="contenido" rows="4" required></textarea>
+            <label for="contenido">Contenido</label>
+            <textarea id="contenido" name="contenido" rows="4" required></textarea>
 
-        <label for="usuarioId">ID Usuario</label>
-        <input type="number" id="usuarioId" name="usuarioId" required>
+            <label for="usuarioId">ID Usuario</label>
+            <input type="number" id="usuarioId" name="usuarioId" required>
 
-        <button type="submit">Crear Noticia</button>
-    </form>
-    <div id="mensaje" class="error"></div>
-</div>
-
+            <button type="submit">Crear Noticia</button>
+        </form>
+        <div id="mensaje" class="error"></div>
+    </div>
 <script src="crearNoticia.js"></script>
+</div>
 </body>
 </html>
