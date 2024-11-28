@@ -1,5 +1,6 @@
 package com.ubb.proyecto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.*;
 import java.util.List;
@@ -20,7 +21,11 @@ public class Permiso {
     private String descripcion;
 
     @ManyToMany(mappedBy = "permisos")
+<<<<<<< HEAD
     @JsonBackReference 
+=======
+    @JsonIgnore
+>>>>>>> master
     private List<Rol> roles;
 
     public Permiso(Integer idPermiso, String nombre) {
@@ -28,7 +33,12 @@ public class Permiso {
         this.nombre = nombre;
     }
 
+<<<<<<< HEAD
     public Permiso() {}
+=======
+    public Permiso() {
+    }
+>>>>>>> master
     // Getters y Setters
 
     public Integer getIdPermiso() {

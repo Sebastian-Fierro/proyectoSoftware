@@ -1,9 +1,17 @@
 package com.ubb.proyecto.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "idNoticia"
+)
 @Entity
 @Table(name = "noticia")
 public class Noticia {
@@ -21,13 +29,22 @@ public class Noticia {
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
+<<<<<<< HEAD
     @ManyToMany
+=======
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+>>>>>>> master
     @JoinTable(name = "noticiacategoria", joinColumns = @JoinColumn(name = "id_noticia"),
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private List<Categoria> categoriaList;
 
-    @ManyToMany(mappedBy = "noticias")
-    private List<Usuario> usuariosList;
+    @ManyToMany
+    @JoinTable(
+            name = "usuarionoticia",
+            joinColumns = @JoinColumn(name = "id_noticia"),
+            inverseJoinColumns = @JoinColumn(name = "id_user")
+    )
+    private Set<Usuario> usuarios = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {
@@ -84,11 +101,20 @@ public class Noticia {
         this.categoriaList = categoriaList;
     }
 
+<<<<<<< HEAD
     public List<Usuario> getUsuariosList() {
         return usuariosList;
     }
 
     public void setUsuariosList(List<Usuario> usuariosList) {
         this.usuariosList = usuariosList;
+=======
+    public Set<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(Set<Usuario> usuarios) {
+        this.usuarios = usuarios;
+>>>>>>> master
     }
 }

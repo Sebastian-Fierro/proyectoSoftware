@@ -21,10 +21,10 @@ public class Multimedia {
 
     @Column(name = "url", nullable = false)
     private String url;
-
+/*
     @ManyToMany(mappedBy = "multimedia")
     private List<Usuario> usuarios;
-
+*/
     // Getters and Setters
 
     public int getIdMult() {

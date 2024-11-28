@@ -2,6 +2,10 @@ package com.ubb.proyecto.controller;
 
 import java.util.List;
 import com.ubb.proyecto.model.Noticia;
+<<<<<<< HEAD
+=======
+import com.ubb.proyecto.model.NoticiaDTO;
+>>>>>>> master
 import com.ubb.proyecto.repository.RepositorioNoticia;
 import com.ubb.proyecto.service.NoticiaService;
 
@@ -12,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/noticia")
 public class NoticiaController {
@@ -24,7 +28,7 @@ public class NoticiaController {
     @Autowired
     private RepositorioNoticia repositorioNoticia;
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Noticia> getAllNoticias() {
         return noticiaService.getAllNoticias();
     }
@@ -36,8 +40,15 @@ public class NoticiaController {
                        .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());//Si no, crea respuesta HTTP NOT FOUND
     }
 
+<<<<<<< HEAD
     @PostMapping("/crear")
     public ResponseEntity<String> crearNoticia(@RequestBody Noticia noticia, @RequestParam int usuarioId) {
+=======
+
+    @PostMapping("/crear")
+    public ResponseEntity<?> crearNoticia(@RequestBody NoticiaDTO noticia, @RequestParam int usuarioId) {
+
+>>>>>>> master
         if (!usuarioService.tienePermisoParaCrearNoticias(usuarioId)) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("No tienes permiso para crear noticias.");
         }
@@ -47,8 +58,14 @@ public class NoticiaController {
             return ResponseEntity.badRequest().body("El título y el contenido no pueden estar vacíos.");
         }
 
+<<<<<<< HEAD
         repositorioNoticia.save(noticia);
         return ResponseEntity.ok("Noticia creada con éxito.");
+=======
+        Noticia nuevaNoticia = noticiaService.crearNoticia(noticia, usuarioId);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaNoticia);
+>>>>>>> master
     }
 
     @DeleteMapping("/{id}")

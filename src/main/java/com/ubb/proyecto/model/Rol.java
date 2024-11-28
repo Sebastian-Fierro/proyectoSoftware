@@ -1,5 +1,6 @@
 package com.ubb.proyecto.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.*;
 import java.util.List;
@@ -18,11 +19,19 @@ public class Rol {
     @ManyToMany
     @JoinTable(name = "rolpermiso", joinColumns = @JoinColumn(name = "id_rol"),
             inverseJoinColumns = @JoinColumn(name = "id_permiso"))
+<<<<<<< HEAD
     //@JsonManagedReference  provoca errror 415 en infocontact      
     private List<Permiso> permisos;
 
     @OneToMany(mappedBy = "rol")
     @JsonBackReference
+=======
+    @JsonIgnore
+    private List<Permiso> permisos;
+
+    @OneToMany(mappedBy = "rol")
+    @JsonIgnore
+>>>>>>> master
     private List<Usuario> usuarios;
 
     public Rol(Integer id_rol, String nombre) {
@@ -49,6 +58,26 @@ public class Rol {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+<<<<<<< HEAD
+=======
+
+    public List<Permiso> getPermisos() {
+        return permisos;
+    }
+
+    public void setPermisos(List<Permiso> permisos) {
+        this.permisos = permisos;
+    }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+}
+>>>>>>> master
 
     public List<Permiso> getPermisos() {
         return permisos;

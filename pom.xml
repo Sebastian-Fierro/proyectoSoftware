@@ -95,6 +95,14 @@
 			<version>4.11.0</version>
 			<scope>test</scope>
 		</dependency>
+<<<<<<< HEAD
+=======
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+
+>>>>>>> master
 
 	</dependencies>
 

@@ -5,7 +5,11 @@
           box-sizing: border-box;
         }
         body {
+<<<<<<< HEAD
           font-family: "Inter", sans-serif;
+=======
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+>>>>>>> master
         }
         .formbold-main-wrapper {
           display: flex;
@@ -18,7 +22,11 @@
           margin: 0 auto;
           max-width: 550px;
           width: 100%;
+<<<<<<< HEAD
           background: white;
+=======
+          background: rgba(255, 255, 255, 0);
+>>>>>>> master
         }
       
         .formbold-input-flex {

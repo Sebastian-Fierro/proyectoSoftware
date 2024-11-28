@@ -9,6 +9,12 @@ import java.util.List;
 @Table(name = "comentario")
 public class Comentario {
 
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> master
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comentario")
@@ -22,10 +28,10 @@ public class Comentario {
 
     @Column(name = "fecha", nullable = false)
     private LocalDate fecha;
-
+/*
     @ManyToMany(mappedBy = "comentarios")
     private List<Usuario> usuarios;
-
+*/
     @ManyToMany
     @JoinTable(name = "eventocomentario", joinColumns = @JoinColumn(name = "id_comentario"),
             inverseJoinColumns = @JoinColumn(name = "id_evento"))
@@ -76,7 +82,12 @@ public class Comentario {
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
+/*
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
 
+<<<<<<< HEAD
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
@@ -84,6 +95,11 @@ public class Comentario {
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
+=======
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }*/
+>>>>>>> master
 
     public List<Evento> getEventoList() {
         return eventoList;

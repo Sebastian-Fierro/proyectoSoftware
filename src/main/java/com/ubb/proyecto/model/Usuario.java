@@ -1,14 +1,30 @@
 package com.ubb.proyecto.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+<<<<<<< HEAD
 import com.fasterxml.jackson.annotation.*;
+=======
+import java.util.Set;
+>>>>>>> master
 
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id_user"
+)
 @Entity
 @Table(name = "usuario")
 public class Usuario {
+<<<<<<< HEAD
     
+=======
+>>>>>>> master
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
@@ -24,10 +40,14 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "rol_user")
+<<<<<<< HEAD
     //@JsonManagedReference provoca errror 415 en infocontact
+=======
+    @JsonIgnore
+>>>>>>> master
     private Rol rol;
 
-    @ManyToMany
+    /*@ManyToMany
     @JoinTable(name = "usuariocomentario", joinColumns = @JoinColumn(name = "id_usuario"),
             inverseJoinColumns = @JoinColumn(name = "id_comentario"))
     private List<Comentario> comentarios;
@@ -44,7 +64,12 @@ public class Usuario {
 
     @ManyToMany(mappedBy = "usuarios")
     private List<Evento> eventos;
+*/
+    @ManyToMany(mappedBy = "usuarios")
+    @JsonBackReference
+    private Set<Noticia> noticias = new HashSet<>();
 
+<<<<<<< HEAD
     @ManyToMany
     @JoinTable(name = "usuarionoticia", joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_noticia"))
@@ -59,9 +84,13 @@ public class Usuario {
         this.nombre = nombre;
         this.contraseña = contraseña;
         this.correo = correo;
+=======
+    public Usuario() {
+>>>>>>> master
     }
 
     // Getters y Setters
+
     public Integer getId_user() {
         return id_user;
     }
@@ -108,5 +137,45 @@ public class Usuario {
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+/*
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+
+    public List<Componentes> getComponentes() {
+        return componentes;
+    }
+
+    public void setComponentes(List<Componentes> componentes) {
+        this.componentes = componentes;
+    }
+
+    public List<Multimedia> getMultimedia() {
+        return multimedia;
+    }
+
+    public void setMultimedia(List<Multimedia> multimedia) {
+        this.multimedia = multimedia;
+    }
+
+    public List<Evento> getEventos() {
+        return eventos;
+    }
+
+    public void setEventos(List<Evento> eventos) {
+        this.eventos = eventos;
+    }
+*/
+    public Set<Noticia> getNoticias() {
+        return noticias;
+    }
+
+    public void setNoticias(Set<Noticia> noticias) {
+        this.noticias = noticias;
     }
 }
