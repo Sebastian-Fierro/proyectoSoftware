@@ -4,18 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Noticia</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+      // Código para incluir el header
+      document.addEventListener("DOMContentLoaded", () => {
+          fetch('headerAdmin.html')
+              .then(response => response.text())
+              .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+      });
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            
+            
             height: 100vh;
         }
         .form-container {
+
             background: #fff;
             padding: 20px;
             border-radius: 8px;
@@ -62,8 +71,12 @@
             color: green;
         }
     </style>
+
+    
 </head>
 <body>
+    <br/>
+    <br/>
 <div class="form-container">
     <h1>Crear Noticia</h1>
     <form id="crearNoticiaForm">
