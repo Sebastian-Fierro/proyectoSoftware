@@ -3,55 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informacion de Contacto POLOSALUD ÑUBLE</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            text-align: center;
-            padding: 1rem 0;
-        }
-        main {
-            margin: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        .form-container {
-            margin-top: 20px;
-        }
-        .form-container input, .form-container button {
-            padding: 10px;
-            margin: 5px;
-        }
-    </style>
+    <title>Gestión de InfoContact</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
     <header>
-        <h1>InfoContact Management</h1>
+        <h1>Gestión de InfoContact</h1>
     </header>
     <main>
+        <!-- Sección para listar contactos -->
         <section>
             <h2>Lista de InfoContact</h2>
-            <table>
+            <table id="infoContactTable">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -62,78 +25,29 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="contactTableBody">
-                    <!-- Aquí se llenará dinámicamente con datos -->
+                <tbody>
+                    <!-- Datos dinámicos desde JS -->
                 </tbody>
             </table>
         </section>
 
-        <section class="form-container">
-            <h2>Añadir/Actualizar InfoContact</h2>
+        <!-- Formulario para editar contacto -->
+        <section>
+            <h2>Actualizar InfoContact</h2>
             <form id="infoContactForm">
-                <input type="hidden" id="idContact" name="idContact">
+                <input type="hidden" id="idContact">
                 <label for="correo">Correo:</label>
                 <input type="email" id="correo" name="correo" required>
-                <br>
                 <label for="telefono">Teléfono:</label>
                 <input type="text" id="telefono" name="telefono" required>
-                <br>
                 <label for="instagram">Instagram:</label>
                 <input type="text" id="instagram" name="instagram" required>
-                <br>
                 <label for="facebook">Facebook:</label>
                 <input type="text" id="facebook" name="facebook" required>
-                <br>
-                <button type="submit">Guardar</button>
+                <button type="submit">Actualizar</button>
             </form>
         </section>
     </main>
-
-    <script>
-        document.getElementById("infoContactForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            const contact = {
-                idContact: document.getElementById("idContact").value || null,
-                correo: document.getElementById("correo").value,
-                telefono: document.getElementById("telefono").value,
-                instagram: document.getElementById("instagram").value,
-                facebook: document.getElementById("facebook").value,
-            };
-
-            console.log("Formulario enviado:", contact);
-            // Aquí puedes realizar una llamada AJAX para enviar los datos al backend
-        });
-
-        function loadContacts() {
-            // Simulación de carga de datos
-            const mockData = [
-                { idContact: 1, correo: "user1@example.com", telefono: "123456789", instagram: "@user1", facebook: "user1fb" },
-                { idContact: 2, correo: "user2@example.com", telefono: "987654321", instagram: "@user2", facebook: "user2fb" },
-            ];
-
-            const tableBody = document.getElementById("contactTableBody");
-            mockData.forEach(contact => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${contact.idContact}</td>
-                    <td>${contact.correo}</td>
-                    <td>${contact.telefono}</td>
-                    <td>${contact.instagram}</td>
-                    <td>${contact.facebook}</td>
-                    <td><button onclick="editContact(${contact.idContact})">Editar</button></td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        function editContact(id) {
-            alert(`Editar contacto con ID: ${id}`);
-            // Aquí puedes cargar los datos del contacto en el formulario
-        }
-
-        // Inicializa la lista de contactos al cargar la página
-        document.addEventListener("DOMContentLoaded", loadContacts);
-    </script>
+    <script src="/static/js/infoContact.js"></script>
 </body>
 </html>
