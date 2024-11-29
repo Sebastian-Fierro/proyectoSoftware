@@ -29,11 +29,7 @@ public class Noticia {
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime createdAt;
 
-<<<<<<< HEAD
-    @ManyToMany
-=======
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
->>>>>>> master
     @JoinTable(name = "noticiacategoria", joinColumns = @JoinColumn(name = "id_noticia"),
             inverseJoinColumns = @JoinColumn(name = "id_categoria"))
     private List<Categoria> categoriaList;
@@ -101,20 +97,11 @@ public class Noticia {
         this.categoriaList = categoriaList;
     }
 
-<<<<<<< HEAD
-    public List<Usuario> getUsuariosList() {
-        return usuariosList;
-    }
-
-    public void setUsuariosList(List<Usuario> usuariosList) {
-        this.usuariosList = usuariosList;
-=======
     public Set<Usuario> getUsuarios() {
         return usuarios;
     }
 
     public void setUsuarios(Set<Usuario> usuarios) {
         this.usuarios = usuarios;
->>>>>>> master
     }
 }

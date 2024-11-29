@@ -8,11 +8,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
-<<<<<<< HEAD
-import com.fasterxml.jackson.annotation.*;
-=======
 import java.util.Set;
->>>>>>> master
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -21,10 +17,6 @@ import java.util.Set;
 @Entity
 @Table(name = "usuario")
 public class Usuario {
-<<<<<<< HEAD
-    
-=======
->>>>>>> master
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
@@ -40,11 +32,7 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "rol_user")
-<<<<<<< HEAD
-    //@JsonManagedReference provoca errror 415 en infocontact
-=======
     @JsonIgnore
->>>>>>> master
     private Rol rol;
 
     /*@ManyToMany
@@ -69,24 +57,7 @@ public class Usuario {
     @JsonBackReference
     private Set<Noticia> noticias = new HashSet<>();
 
-<<<<<<< HEAD
-    @ManyToMany
-    @JoinTable(name = "usuarionoticia", joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_noticia"))
-    private List<Noticia> noticias;
-    
-    @OneToOne(mappedBy = "updated_by")
-    private InfoContact infoContact;
-
-    public Usuario() {}
-    public Usuario(Integer id_user, String nombre, String contraseña, String correo) {
-        this.id_user = id_user;
-        this.nombre = nombre;
-        this.contraseña = contraseña;
-        this.correo = correo;
-=======
     public Usuario() {
->>>>>>> master
     }
 
     // Getters y Setters

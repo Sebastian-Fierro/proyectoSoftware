@@ -9,12 +9,9 @@ import java.util.List;
 @Table(name = "comentario")
 public class Comentario {
 
-<<<<<<< HEAD
-=======
 
 
 
->>>>>>> master
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comentario")
@@ -87,19 +84,9 @@ public class Comentario {
         return usuarios;
     }
 
-<<<<<<< HEAD
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
-=======
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }*/
->>>>>>> master
 
     public List<Evento> getEventoList() {
         return eventoList;

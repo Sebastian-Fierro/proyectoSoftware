@@ -8,12 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< HEAD
-=======
 import java.util.List;
 import java.util.Optional;
 
->>>>>>> master
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -21,8 +18,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-<<<<<<< HEAD
-=======
     @GetMapping("/")
     public List<Usuario> getAllUsuarios() {
         return usuarioService.getAllUsuarios();
@@ -35,7 +30,6 @@ public class UsuarioController {
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build()); // Si no, se devuelve código 404
     }
 
->>>>>>> master
     @PostMapping
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario){
         Usuario savedUsuario = usuarioService.saveUsuario(usuario);
@@ -61,8 +55,6 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-<<<<<<< HEAD
-=======
 
     @CrossOrigin
     @PostMapping("/login")
@@ -74,5 +66,4 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
->>>>>>> master
 }

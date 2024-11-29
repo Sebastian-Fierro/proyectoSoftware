@@ -68,11 +68,7 @@ public class UsuarioService {
         return false;
     }
 
-<<<<<<< HEAD
-    
-=======
     public Usuario loginUsuario(Usuario usuario) {
         return usuarioRepository.findByCorreoAndContraseña(usuario.getCorreo(), usuario.getContraseña());
     }
->>>>>>> master
 }

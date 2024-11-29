@@ -21,11 +21,7 @@ public class Permiso {
     private String descripcion;
 
     @ManyToMany(mappedBy = "permisos")
-<<<<<<< HEAD
-    @JsonBackReference 
-=======
     @JsonIgnore
->>>>>>> master
     private List<Rol> roles;
 
     public Permiso(Integer idPermiso, String nombre) {
@@ -33,12 +29,8 @@ public class Permiso {
         this.nombre = nombre;
     }
 
-<<<<<<< HEAD
-    public Permiso() {}
-=======
     public Permiso() {
     }
->>>>>>> master
     // Getters y Setters
 
     public Integer getIdPermiso() {
