@@ -1,7 +1,7 @@
 // URL base para el backend
 const API_URL = "/infoContacto";
 
-// Función para cargar contactos (GET)
+// Función (GET)
 function loadContacts() {
     fetch(API_URL)
         .then(response => response.json())
