@@ -13,11 +13,31 @@
                 .then(data => document.body.insertAdjacentHTML('afterbegin', data));
         });
     </script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        .fullscreen-image {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .fullscreen-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
 <main>
-    <h1>Bienvenido a Mi Sitio</h1>
-    <p>Contenido principal aquí...</p>
+    <div class="fullscreen-image">
+        <img src="images/polo-fondo.png">
+    </div>
 </main>
 </body>
 </html>
