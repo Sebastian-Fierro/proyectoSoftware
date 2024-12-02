@@ -141,7 +141,7 @@ public class InfoContactControllerTest {
         // Do nothing al eliminar
 
         // When
-        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.delete("/infoContacto/3"))
+        MockHttpServletResponse response = mockMvc.perform(MockMvcRequestBuilders.delete("/infoContacto/1"))
                 .andReturn()
                 .getResponse();
 
