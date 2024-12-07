@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Noticias</title>
-    <link rel="stylesheet" href="stylenoticias.css">
+    <title>Borrar Noticias</title>
+    <link rel="stylesheet" href="borrarNoticia.css">
     <link rel="stylesheet" href="styles.css">
     <script>
         // Código para incluir el header
@@ -16,11 +16,14 @@
     </script>
 </head>
 <body>
-<div class="contenido" id="noticias-container">
-    <h1>Noticias Recientes</h1>
-    <div id="noticias-list"></div>
-    <p class="error" id="error-message"></p>
-</div>
-<script src="scriptnoticia.js"></script>
+<main>
+    <section id="noticias">
+        <div id="error-message" class="error-message" role="alert"></div>
+        <div id="noticias-list" class="noticias-list">
+            <!-- Aquí se cargarán dinámicamente las noticias -->
+        </div>
+    </section>
+</main>
+<script src="borrarNoticia.js"></script>
 </body>
 </html>
