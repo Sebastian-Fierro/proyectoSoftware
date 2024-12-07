@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Borrar Noticias</title>
+    <link rel="stylesheet" href="borrarNoticia.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Código para incluir el header
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('headerAdmin.html')
+                .then(response => response.text())
+                .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+        });
+    </script>
+</head>
+<body>
+<main>
+    <section id="noticias">
+        <div id="error-message" class="error-message" role="alert"></div>
+        <div id="noticias-list" class="noticias-list">
+            <!-- Aquí se cargarán dinámicamente las noticias -->
+        </div>
+    </section>
+</main>
+<script src="borrarNoticia.js"></script>
+</body>
+</html>
