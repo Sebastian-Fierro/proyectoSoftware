@@ -5,12 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Información de Contacto</title>
     <link rel="stylesheet" href="estiloInfoContact.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Código para incluir el header
+            fetch('headerAdmin.html')
+                .then(response => response.text())
+                .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+                
+            // Código para incluir el header
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-container").innerHTML = data)
+                .catch(err => console.error("Error al cargar el footer:", err));
+        });
+    </script>
 </head>
 <body>
-    <header>
-        <h1>Editar Información de Contacto</h1>
-    </header>
     <main>
+        <h2>Editar Información de Contacto</h2>
         <form id="updateForm">
             <label for="correo">Correo Electrónico:</label>
             <input type="email" id="correo" name="correo" required>

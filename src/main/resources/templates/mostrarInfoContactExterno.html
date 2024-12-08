@@ -7,17 +7,15 @@
     <link rel="stylesheet" href="estiloInfoContact.css">
     <link rel="stylesheet" href="styles.css" />
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Código para incluir el header
-            fetch('headerAdmin.html')
-                .then(response => response.text())
-                .then(data => document.body.insertAdjacentHTML('afterbegin', data));
-                
-            // Código para incluir el header
-            fetch("footer.html")
-            .then(response => response.text())
-            .then(data => document.body.insertAdjacentHTML('beforeend', data));
-        });
+      // Código para incluir el header
+      document.addEventListener("DOMContentLoaded", () => {
+        fetch("header.html")
+          .then((response) => response.text())
+          .then((data) => document.body.insertAdjacentHTML("afterbegin", data));
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then((data) => document.body.insertAdjacentHTML("beforeend", data));
+      });
     </script>
       <style>
         body {
@@ -168,3 +166,4 @@
     <script src="mostrarInfoContact.js"></script>
 </body>
 </html>
+
