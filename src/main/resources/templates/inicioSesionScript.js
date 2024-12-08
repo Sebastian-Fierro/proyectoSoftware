@@ -1,38 +1,24 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Evita que el formulario se envíe de la manera tradicional
+document.getElementById('loginForm').addEventListener('submit', async function (event) {
+    event.preventDefault();
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const errorMessage = document.getElementById('error-message');
 
-    fetch('http://localhost:8080/usuario/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email: email, password: password })
-    })
+    try {
+        const response = await fetch('http://localhost:8080/usuario'); // Endpoint de tu API
+        const usuarios = await response.json();
 
-    .then(response => {
-        if(response.ok){
-            return response.json();
-        }else if(response.status === 401){
-            throw new Error('Correo electrónico o contraseña incorrectos');
-        }else{
-            throw new Error('Error en la petición');
-        }
-    })
+        // Validar las credenciales
+        const usuario = usuarios.find(user => user.correo === email && user.contraseña === password);
 
-    .then(data => {
-        if (data.success) {
-            // Redirigir a la página de inicio o dashboard
-            window.location.href = '/dashboard';
+        if (usuario) {
+            window.location.href = 'index.html'; // Redirigir a index.html
         } else {
-            // Mostrar mensaje de error
-            alert('Correo electrónico o contraseña incorrectos');
+            errorMessage.textContent = 'Correo o contraseña incorrectos';
         }
-    })
-
-    .catch(error => {
-        console.error('Error:', error);
-    });
+    } catch (error) {
+        errorMessage.textContent = 'Error al conectar con el servidor';
+        console.error(error);
+    }
 });
