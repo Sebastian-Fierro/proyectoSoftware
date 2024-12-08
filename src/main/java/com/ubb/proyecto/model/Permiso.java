@@ -21,7 +21,7 @@ public class Permiso {
     private String descripcion;
 
     @ManyToMany(mappedBy = "permisos")
-    @JsonIgnore
+    @JsonBackReference
     private List<Rol> roles;
 
     public Permiso(Integer idPermiso, String nombre) {

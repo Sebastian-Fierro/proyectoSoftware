@@ -19,7 +19,7 @@ public class RolController {
     @Autowired
     private RolService rolService;
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Rol> getAllRols() {
         return rolService.getAllRol();
     }
