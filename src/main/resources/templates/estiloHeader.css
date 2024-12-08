@@ -75,10 +75,6 @@ header {
     background-color: #005f99;
 }
 
-.logout-button:hover {
-    background-color: #005f99;
-}
-
 /* Menú desplegable */
 .dropdown {
     position: relative;

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lista de Noticias</title>
+    <link rel="stylesheet" href="stylenoticias.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Código para incluir el header
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then(
+            (data) =>
+              (document.getElementById("footer-container").innerHTML = data)
+          )
+          .catch((err) => console.error("Error al cargar el footer:", err));
+        fetch("header.html")
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("header-container").innerHTML = data;
+          })
+          .catch((err) => console.error("Error al cargar el header:", err));
+      });
+    </script>
+  </head>
+  <body>
+    <div class="contenido" id="noticias-container">
+      <h1>Noticias Recientes</h1>
+      <div id="noticias-list"></div>
+      <p class="error" id="error-message"></p>
+    </div>
+    <script src="scriptnoticia.js"></script>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div id="footer-container"></div>
+    <div id="header-container"></div>
+  </body>
+</html>
