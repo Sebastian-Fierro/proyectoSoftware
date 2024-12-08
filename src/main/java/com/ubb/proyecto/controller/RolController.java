@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/rol")
 
@@ -19,7 +19,7 @@ public class RolController {
     @Autowired
     private RolService rolService;
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Rol> getAllRols() {
         return rolService.getAllRol();
     }
@@ -38,7 +38,7 @@ public class RolController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRol);
     }
 
-     @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Rol> updateRol(@PathVariable Integer id, @RequestBody Rol rolDetails) {
         try {
             Rol updatedRol = rolService.updateRol(id, rolDetails);

@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -18,17 +20,41 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/")
-    public List<Usuario> getAllUsuarios() {
-        return usuarioService.getAllUsuarios();
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Map<String, String> credentials) {
+        String correo = credentials.get("correo");
+        String contraseña = credentials.get("contraseña");
+    
+        Usuario usuario = usuarioService.getUsuarioByCorreoAndContraseña(correo, contraseña);
+    
+        if (usuario != null) {
+            return ResponseEntity.ok("Login exitoso");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+        }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id) {
-        Optional<Usuario> usuario = usuarioService.getUsuariosById(id);
-        return usuario.map(ResponseEntity::ok) // Si se encuentra un usuario, se devuelve una respuesta con código 200
-                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build()); // Si no, se devuelve código 404
+    // Obtener todos los usuarios
+    @GetMapping
+    public ResponseEntity<List<Usuario>> getAllUsuarios() {
+        List<Usuario> usuarios = usuarioService.getAllUsuarios();
+        return ResponseEntity.ok(usuarios);
     }
+
+    
+
+     // Obtener un usuario por ID
+     @GetMapping("/{id}")
+     public ResponseEntity<Usuario> getUsuariosById(@PathVariable Integer id) {
+         Optional<Usuario> usuario = usuarioService.getUsuariosById(id);
+          if (usuario.isPresent()) {
+             return ResponseEntity.ok(usuario.get());
+         } else {
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+         }
+     }
+
+   
 
     @PostMapping
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario){
@@ -56,14 +82,4 @@ public class UsuarioController {
         }
     }
 
-    @CrossOrigin
-    @PostMapping("/login")
-    public ResponseEntity<Usuario> loginUsuario(@RequestBody Usuario usuario) {
-        Usuario loggedUsuario = usuarioService.loginUsuario(usuario);
-        if (loggedUsuario != null) {
-            return ResponseEntity.ok(loggedUsuario);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
 }

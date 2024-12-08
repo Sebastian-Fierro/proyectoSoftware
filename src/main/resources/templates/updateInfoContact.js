@@ -1,41 +1,46 @@
-const API_URL = "/infoContacto"; // Endpoint de la API
+document.getElementById("updateForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Evita la recarga de la página
 
-// Cargar la información desde el backend
-function loadContactInfo() {
-    fetch(API_URL)
-        .then(response => response.json())
-        .then(data => {
-            // Actualiza los elementos visibles en el HTML
-            document.getElementById("telefono").textContent = data.telefono;
-            document.getElementById("correo").textContent = data.correo;
-            document.getElementById("facebook").href = data.facebook;
-            document.getElementById("facebook").textContent = "Visitar Facebook";
-        })
-        .catch(error => console.error("Error cargando información de contacto:", error));
-}
+    const API_URL = "http://localhost:8080/infoContacto/update/3"; // Reemplaza "1" con el ID correspondiente.
 
-// Manejar la edición y actualización (PUT)
-document.getElementById("editContactForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
+    // Recopilar los datos del formulario
     const updatedContact = {
-        telefono: document.getElementById("newTelefono").value || undefined,
-        correo: document.getElementById("newCorreo").value || undefined,
-        facebook: document.getElementById("newFacebook").value || undefined,
+        correo: document.getElementById("correo").value,
+        telefono: document.getElementById("telefono").value,
+        facebook: document.getElementById("facebook").value,
+        instagram: document.getElementById("instagram").value
     };
 
+    // Enviar los datos al backend (simulación de solicitud)
     fetch(API_URL, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedContact)
     })
-        .then(response => response.json())
-        .then(data => {
-            alert("Información actualizada exitosamente.");
-            loadContactInfo(); // Recargar los datos
+        .then(response => {
+            if (response.ok) {
+                alert("Información actualizada correctamente.");
+            } else {
+                alert("Error al actualizar la información.");
+            }
         })
-        .catch(error => console.error("Error actualizando información:", error));
-});
+        .catch(error => console.error("Error:", error));
 
-// Carga inicial de datos
-document.addEventListener("DOMContentLoaded", loadContactInfo);
+        document.addEventListener("DOMContentLoaded", function () {
+            const API_URL = "http://localhost:8080/infoContacto/3"; // Reemplaza "1" con el ID correspondiente.
+        
+            fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) throw new Error("No se pudo cargar la información.");
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById("correo").value = data.correo;
+                    document.getElementById("telefono").value = data.telefono;
+                    document.getElementById("facebook").value = data.facebook;
+                    document.getElementById("instagram").value = data.instagram;
+                })
+                .catch(error => console.error("Error al cargar la información:", error));
+        });
+        
+});
