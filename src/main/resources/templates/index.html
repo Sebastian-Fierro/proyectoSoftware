@@ -6,11 +6,18 @@
     <title>Página de Inicio</title>
     <link rel="stylesheet" href="styles.css">
     <script>
-        // Código para incluir el header
+        
         document.addEventListener("DOMContentLoaded", () => {
+            // Código para incluir el header
             fetch('headerAdmin.html')
                 .then(response => response.text())
                 .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+                
+            // Código para incluir el header
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-container").innerHTML = data)
+                .catch(err => console.error("Error al cargar el footer:", err));
         });
     </script>
     <style>
@@ -58,6 +65,7 @@
     </style>
 </head>
 <body>
+    
 <main>
     <div class="fullscreen-image">
         <img src="images/polo-fondo.png" alt="Imagen a pantalla completa">
@@ -70,5 +78,10 @@
     </div>
     <br>
 </main>
+<br>
+<br>
+<br>
+<br>
+<div id="footer-container"></div>
 </body>
 </html>

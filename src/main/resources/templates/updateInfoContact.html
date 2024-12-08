@@ -3,30 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Información de Contacto</title>
-    <link rel="stylesheet" href="styleUpdateInfoContact.css">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="estiloInfoContact.css">
 </head>
 <body>
     <header>
-        <h1>Editar Información de Contacto</h1>
+        <h1>Información de Contacto</h1>
     </header>
     <main>
-        <form id="editContactForm">
-            <label for="correo">Correo Electrónico:</label>
-            <input type="email" id="correo" name="correo" required>
+        <!-- Mostrar información -->
+        <section id="contactInfo">
+            <h2>Contacto Actual</h2>
+            <p><strong>Teléfono:</strong> <span id="telefono">+123 456 789</span></p>
+            <p><strong>Correo:</strong> <span id="correo">info@ejemplo.com</span></p>
+            <p><strong>Facebook:</strong> <a id="facebook" href="https://facebook.com/tuPagina" target="_blank">Visitar Facebook</a></p>
+        </section>
 
-            <label for="telefono">Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono" required>
-
-            <label for="facebook">Facebook:</label>
-            <input type="url" id="facebook" name="facebook">
-
-            <label for="instagram">Instagram:</label>
-            <input type="url" id="instagram" name="instagram">
-
-            <button type="submit">Guardar Cambios</button>
-        </form>
+        <!-- Formulario para modificar información -->
+        <section id="editContact">
+            <h2>Editar Información de Contacto</h2>
+            <form id="editContactForm">
+                <label for="newTelefono">Teléfono:</label>
+                <input type="text" id="newTelefono" name="newTelefono" placeholder="+123 456 789">
+                
+                <label for="newCorreo">Correo:</label>
+                <input type="email" id="newCorreo" name="newCorreo" placeholder="info@ejemplo.com">
+                
+                <label for="newFacebook">Facebook:</label>
+                <input type="url" id="newFacebook" name="newFacebook" placeholder="https://facebook.com/tuPagina">
+                
+                <button type="submit">Guardar Cambios</button>
+            </form>
+        </section>
     </main>
     <script src="updateInfoContact.js"></script>
 </body>
+        <!-- Misma estructura que antes -->
+    <section id="contactInfo">
+        <h2>Contacto Actual</h2>
+        <p><strong>Teléfono:</strong> <span id="telefono"></span></p>
+        <p><strong>Correo:</strong> <span id="correo"></span></p>
+        <p><strong>Facebook:</strong> <a id="facebook" href="#" target="_blank"></a></p>
+    </section>
+
 </html>
