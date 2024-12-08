@@ -25,7 +25,6 @@ public class Rol {
     @ManyToMany
     @JoinTable(name = "rolpermiso", joinColumns = @JoinColumn(name = "id_rol"),
             inverseJoinColumns = @JoinColumn(name = "id_permiso"))
-    @JsonIgnore
     private List<Permiso> permisos;
 
     @OneToMany(mappedBy = "rol")
