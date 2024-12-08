@@ -6,7 +6,7 @@ document.getElementById('loginForm').addEventListener('submit', async function (
     const errorMessage = document.getElementById('error-message');
 
     try {
-        const response = await fetch('http://localhost:8080/usuario'); // Endpoint de tu API
+        const response = await fetch('http://localhost:8080/usuario');
         const usuarios = await response.json();
 
         // Validar las credenciales
@@ -16,9 +16,11 @@ document.getElementById('loginForm').addEventListener('submit', async function (
             window.location.href = 'index.html'; // Redirigir a index.html
         } else {
             errorMessage.textContent = 'Correo o contraseña incorrectos';
+            errorMessage.style.display = 'block'; // Mostrar mensaje
         }
     } catch (error) {
         errorMessage.textContent = 'Error al conectar con el servidor';
+        errorMessage.style.display = 'block'; // Mostrar mensaje
         console.error(error);
     }
 });
