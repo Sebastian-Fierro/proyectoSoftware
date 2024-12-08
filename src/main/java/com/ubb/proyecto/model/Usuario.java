@@ -26,7 +26,6 @@ public class Usuario {
 
     @ManyToOne
     @JoinColumn(name = "rol_user")
-    @JsonIgnore
     private Rol rol;
 
     /*@ManyToMany
