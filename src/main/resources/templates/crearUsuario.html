@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agregar Usuario</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+        // Código para incluir el header
+        document.addEventListener("DOMContentLoaded", () => {
+          fetch("headerAdmin.html")
+            .then((response) => response.text())
+            .then((data) => document.body.insertAdjacentHTML("afterbegin", data));
+          fetch("footer.html")
+            .then((response) => response.text())
+            .then(
+              (data) =>
+                (document.getElementById("footer-container").innerHTML = data)
+            )
+            .catch((err) => console.error("Error al cargar el footer:", err));
+        });
+    </script>
+    <style>
+      /* El CSS sigue igual */
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f9;
+          margin: 0;
+          padding: 0;
+          height: 100vh;
+        }
+        .form-container {
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          max-width: 400px;
+        }
+        .form-container h1 {
+          margin-bottom: 20px;
+          font-size: 1.5em;
+          color: #333;
+        }
+        .form-container label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+          color: #555;
+        }
+        .form-container input,
+        .form-container textarea,
+        .form-container button {
+          width: 100%;
+          margin-bottom: 15px;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 1em;
+        }
+        .form-container button {
+          background-color: #007bff;
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+        .form-container button:hover {
+          background-color: #0056b3;
+        }
+        .form-container .error,
+        .form-container .success {
+          margin-top: 10px;
+          font-size: 0.9em;
+        }
+        .error {
+          color: red;
+        }
+        .success {
+          color: green;
+        }
+        .cuerpo {
+          /* centrar y espacio vertical */
+          margin: 3rem auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="cuerpo">
+      <div class="form-container">
+        <h1>Agregar Usuario</h1>
+        <form id="crearUsuarioForm">
+          <label for="nombre">Nombre</label>
+          <input type="text" id="nombre" name="nombre" required />
+
+          <label for="correo">Correo</label>
+          <input type="email" id="correo" name="correo" required />
+
+          <label for="contraseña">Contraseña</label>
+          <input type="password" id="contraseña" name="contraseña" required />
+
+          <label for="rol">Rol</label>
+          <input type="number" id="rol" name="rol" required />
+
+          <button type="submit">Crear Usuario</button>
+        </form>
+        <div id="mensaje" class="error"></div>
+      </div>
+    </div>
+    <script>
+      document
+        .getElementById("crearUsuarioForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Obtener los valores del formulario
+          const nombre = document.getElementById("nombre").value.trim();
+          const correo = document.getElementById("correo").value.trim();
+          const contraseña = document.getElementById("contraseña").value.trim();
+          const rol = parseInt(document.getElementById("rol").value);
+
+          const mensaje = document.getElementById("mensaje");
+          mensaje.textContent = "";
+          mensaje.className = "";
+
+          // Validación de campos
+          if (!nombre || !correo || !contraseña || !rol) {
+            mensaje.textContent = "Todos los campos son obligatorios.";
+            mensaje.className = "error";
+            return;
+          }
+
+          try {
+            // Crear fecha automáticamente
+            const fechaCreacion = new Date().toISOString();
+
+            // Solicitud al servidor
+            const response = await fetch("http://localhost:8080/usuario", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                nombre,
+                correo,
+                contraseña,
+                created_at: fechaCreacion,
+                rol: { id_rol: rol },
+              }),
+            });
+
+            // Manejo de respuestas
+            if (response.status === 201) {
+              const data = await response.json();
+              mensaje.textContent = "¡Usuario creado exitosamente!";
+              mensaje.className = "success";
+              console.log("Usuario creado:", data);
+            } else {
+              const errorText = await response.text();
+              mensaje.textContent = errorText || "Error al crear usuario.";
+              mensaje.className = "error";
+            }
+          } catch (error) {
+            mensaje.textContent = "No se pudo conectar con el servidor.";
+            mensaje.className = "error";
+            console.error("Error:", error);
+          }
+        });
+    </script>
+  </body>
+</html>
