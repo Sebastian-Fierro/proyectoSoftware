@@ -1,5 +1,7 @@
-document.getElementById("editContactForm").addEventListener("submit", function (event) {
+document.getElementById("updateForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Evita la recarga de la página
+
+    const API_URL = "http://localhost:8080/infoContacto/update/3"; // Reemplaza "1" con el ID correspondiente.
 
     // Recopilar los datos del formulario
     const updatedContact = {
@@ -10,7 +12,7 @@ document.getElementById("editContactForm").addEventListener("submit", function (
     };
 
     // Enviar los datos al backend (simulación de solicitud)
-    fetch("http://localhost:8080/infoContacto/update", {
+    fetch(API_URL, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedContact)
@@ -23,4 +25,22 @@ document.getElementById("editContactForm").addEventListener("submit", function (
             }
         })
         .catch(error => console.error("Error:", error));
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const API_URL = "http://localhost:8080/infoContacto/3"; // Reemplaza "1" con el ID correspondiente.
+        
+            fetch(API_URL)
+                .then(response => {
+                    if (!response.ok) throw new Error("No se pudo cargar la información.");
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById("correo").value = data.correo;
+                    document.getElementById("telefono").value = data.telefono;
+                    document.getElementById("facebook").value = data.facebook;
+                    document.getElementById("instagram").value = data.instagram;
+                })
+                .catch(error => console.error("Error al cargar la información:", error));
+        });
+        
 });
