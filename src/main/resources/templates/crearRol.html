@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Rol</title>
+    <link rel="stylesheet" href="crearRol.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Código para incluir el header
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('headerAdmin.html')
+                .then(response => response.text())
+                .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+        });
+    </script>
+</head>
+<body>
+<div class="cuerpo">
+    <div class="contenido">
+        <h1>Crear Nuevo Rol</h1>
+        <form id="createRoleForm">
+            <div class="form-group">
+                <label for="roleName">Nombre del Rol</label>
+                <input type="text" id="roleName" placeholder="Ingresa el nombre del rol" required>
+            </div>
+
+            <div class="form-group">
+                <label>Permisos</label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" value="1" data-nombre="EDITAR_NOTICIAS" data-descripcion="Permiso para editar noticias">
+                        EDITAR NOTICIAS
+                    </label>
+                    <label>
+                        <input type="checkbox" value="2" data-nombre="CREAR_NOTICIA" data-descripcion="Permiso para crear noticias">
+                        CREAR NOTICIAS
+                    </label>
+                    <label>
+                        <input type="checkbox" value="3" data-nombre="BORRAR_NOTICIA" data-descripcion="Permiso para borrar noticias">
+                        BORRAR NOTICIAS
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Crear Rol</button>
+        </form>
+        <div id="responseMessage" class="response-message"></div>
+    </div>
+</div>
+<script src="crearRol.js"></script>
+</body>
+</html>
