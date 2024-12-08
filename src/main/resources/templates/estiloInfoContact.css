@@ -4,11 +4,11 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f9;
-    color: #cdb1b1;
+    color: #333333;
 }
 
 header {
-    background-color: #2325a7;
+    background-color: #2685c0;
     color: white;
     text-align: center;
     padding: 1rem 0;
@@ -38,7 +38,7 @@ th, td {
 }
 
 th {
-    background-color: #2325a7;
+    background-color: #2685c0;
     color: white;
     font-size: 1rem;
 }
@@ -56,7 +56,7 @@ tr:hover {
 }
 
 button {
-    background-color: #2325a7;
+    background-color: #2685c0;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -66,7 +66,7 @@ button {
 }
 
 button:hover {
-    background-color: #2325a7;
+    background-color: #2685c0;
 }
 
 /* Sección del formulario */
@@ -96,7 +96,7 @@ form input {
 }
 
 form button {
-    background-color: #2325a7;
+    background-color: #2685c0;
     color: white;
     font-size: 1rem;
     padding: 10px 15px;
@@ -108,12 +108,12 @@ form button {
 }
 
 form button:hover {
-    background-color: #2325a7;
+    background-color: #1a5a8a;
 }
 
 /* Encabezados y títulos */
 h2 {
-    color: #2325a7;
+    color: #2685c0;
     font-size: 1.3rem;
     margin-top: 20px;
 }

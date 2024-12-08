@@ -16,6 +16,10 @@
           fetch('headerAdmin.html')
               .then(response => response.text())
               .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+          fetch("footer.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-container").innerHTML = data)
+                .catch(err => console.error("Error al cargar el footer:", err));
       });
     </script>
     <title>Crear categoria</title>
@@ -50,6 +54,7 @@
       </div>
     </div>
     <script src="formularioCategoria.js"></script>
+    <div id="footer-container"></div>
   </body>
 </html>
 

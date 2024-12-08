@@ -12,8 +12,8 @@
             fetch('headerAdmin.html')
                 .then(response => response.text())
                 .then(data => document.body.insertAdjacentHTML('afterbegin', data));
-
-            // Código para incluir el footer
+                
+            // Código para incluir el header
             fetch("footer.html")
                 .then(response => response.text())
                 .then(data => document.getElementById("footer-container").innerHTML = data)
@@ -65,7 +65,7 @@
     </style>
 </head>
 <body>
-    <div id="footer-container"></div>
+    
 <main>
     <div class="fullscreen-image">
         <img src="images/polo-fondo.png" alt="Imagen a pantalla completa">
@@ -78,5 +78,10 @@
     </div>
     <br>
 </main>
+<br>
+<br>
+<br>
+<br>
+<div id="footer-container"></div>
 </body>
 </html>

@@ -1,101 +1,116 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crear Noticia</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <script>
       // Código para incluir el header
       document.addEventListener("DOMContentLoaded", () => {
-          fetch('headerAdmin.html')
-              .then(response => response.text())
-              .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+        fetch("headerAdmin.html")
+          .then((response) => response.text())
+          .then((data) => document.body.insertAdjacentHTML("afterbegin", data));
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then(
+            (data) =>
+              (document.getElementById("footer-container").innerHTML = data)
+          )
+          .catch((err) => console.error("Error al cargar el footer:", err));
       });
     </script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-        }
-        .form-container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        .form-container h1 {
-            margin-bottom: 20px;
-            font-size: 1.5em;
-            color: #333;
-        }
-        .form-container label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
-        }
-        .form-container input, .form-container textarea, .form-container button {
-            width: 100%;
-            margin-bottom: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-        .form-container button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .form-container button:hover {
-            background-color: #0056b3;
-        }
-        .form-container .error, .form-container .success {
-            margin-top: 10px;
-            font-size: 0.9em;
-        }
-        .error {
-            color: red;
-        }
-        .success {
-            color: green;
-        }
-        .cuerpo{/* centrar y espacio vertical */
-            margin: 3rem auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+      }
+      .form-container {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+      .form-container h1 {
+        margin-bottom: 20px;
+        font-size: 1.5em;
+        color: #333;
+      }
+      .form-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #555;
+      }
+      .form-container input,
+      .form-container textarea,
+      .form-container button {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1em;
+      }
+      .form-container button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      .form-container button:hover {
+        background-color: #0056b3;
+      }
+      .form-container .error,
+      .form-container .success {
+        margin-top: 10px;
+        font-size: 0.9em;
+      }
+      .error {
+        color: red;
+      }
+      .success {
+        color: green;
+      }
+      .cuerpo {
+        /* centrar y espacio vertical */
+        margin: 3rem auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
-
-    
-</head>
-<body>
-<div class="cuerpo">
-    <div class="form-container">
+  </head>
+  <body>
+    <div class="cuerpo">
+      <div class="form-container">
         <h1>Crear Noticia</h1>
         <form id="crearNoticiaForm">
-            <label for="titulo">Título</label>
-            <input type="text" id="titulo" name="titulo" required>
+          <label for="titulo">Título</label>
+          <input type="text" id="titulo" name="titulo" required />
 
-            <label for="contenido">Contenido</label>
-            <textarea id="contenido" name="contenido" rows="4" required></textarea>
+          <label for="contenido">Contenido</label>
+          <textarea
+            id="contenido"
+            name="contenido"
+            rows="4"
+            required
+          ></textarea>
 
-            <label for="usuarioId">ID Usuario</label>
-            <input type="number" id="usuarioId" name="usuarioId" required>
+          <label for="usuarioId">ID Usuario</label>
+          <input type="number" id="usuarioId" name="usuarioId" required />
 
-            <button type="submit">Crear Noticia</button>
+          <button type="submit">Crear Noticia</button>
         </form>
         <div id="mensaje" class="error"></div>
+      </div>
+      <script src="crearNoticia.js"></script>
     </div>
-<script src="crearNoticia.js"></script>
-</div>
-</body>
+    <div id="footer-container"></div>
+  </body>
 </html>
