@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiénes Somos - Polo de Salud Región de Ñuble</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f8fb;
+            color: #333;
+        }
+        header {
+            background-color: #005f99;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        section {
+            padding: 40px 20px;
+        }
+        section h2 {
+            color: #005f99;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card h3 {
+            color: #005f99;
+            margin-top: 10px;
+        }
+        .collaborators {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+        .collaborators img {
+            width: 120px;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .collaborators img:hover {
+            transform: scale(1.1);
+        }
+        footer {
+            background-color: #003d66;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Quiénes Somos</h1>
+    </header>
+    <section>
+        <h2>Nuestra Misión</h2>
+        <p style="text-align: center; max-width: 800px; margin: auto;">
+            El Polo de Salud Región de Ñuble trabaja en colaboración con la Universidad del Bío-Bío y el Gobierno Regional para fortalecer la salud pública a través de la formación de capital humano, innovación y vinculación con el medio, contribuyendo al bienestar de la comunidad.
+        </p>
+    </section>
+    <section>
+        <h2>Áreas Estratégicas</h2>
+        <div class="content">
+            <div class="card">
+                <h3>Formación Académica</h3>
+                <p>
+                    Desarrollo de carreras como Medicina y Química y Farmacia, y formación en salud digital, psicología y pedagogía hospitalaria.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Investigación e Innovación</h3>
+                <p>
+                    Proyectos para salud digital, manejo de listas de espera y creación de un Centro Epidemiológico Regional.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Atención Comunitaria</h3>
+                <p>
+                    Creación del Centro Integral de Atención Comunitaria en Salud (CIAS), con enfoque en salud familiar y comunitaria.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Salud Digital</h3>
+                <p>
+                    Implementación de tecnologías innovadoras para la gestión de la salud en la región.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section>
+        <h2>Colaboradores</h2>
+        <p style="text-align: center; max-width: 800px; margin: auto;">
+            Contamos con el apoyo de diversas instituciones y organizaciones comprometidas con la salud pública y la educación en la Región de Ñuble.
+        </p>
+        <div class="collaborators">
+            <img src="images/logo1.png" alt="Logo Universidad del Bío-Bío">
+            <img src="images/logo2.png" alt="Logo Gobierno Regional de Ñuble">
+            <img src="images/logo3.png" alt="Logo Servicio de Salud Ñuble">
+            <img src="images/logo4.png" alt="Logo SEREMI de Salud Ñuble">
+        </div>
+    </section>
+</body>
+</html>

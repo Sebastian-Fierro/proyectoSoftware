@@ -6,21 +6,14 @@
     <title>Inicio</title>
     <link rel="stylesheet" href="styles.css" />
     <script>
+      // Código para incluir el header
       document.addEventListener("DOMContentLoaded", () => {
-        // Código para incluir el header
-        fetch("footer.html")
-          .then((response) => response.text())
-          .then(
-            (data) =>
-              (document.getElementById("footer-container").innerHTML = data)
-          )
-          .catch((err) => console.error("Error al cargar el footer:", err));
         fetch("header.html")
           .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("header-container").innerHTML = data;
-          })
-          .catch((err) => console.error("Error al cargar el header:", err));
+          .then((data) => document.body.insertAdjacentHTML("afterbegin", data));
+        fetch("footer.html")
+          .then((response) => response.text())
+          .then((data) => document.body.insertAdjacentHTML("beforeend", data));
       });
     </script>
     <style>
@@ -87,12 +80,6 @@
           ></iframe>
         </div>
       </div>
-      <br />
     </main>
-    <br />
-    <br />
-    <br />
-    <br />
-    <div id="footer-container"></div>
   </body>
 </html>
