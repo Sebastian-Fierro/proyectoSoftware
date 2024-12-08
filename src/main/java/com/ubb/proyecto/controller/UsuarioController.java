@@ -44,7 +44,7 @@ public class UsuarioController {
     
 
      // Obtener un usuario por ID
-     @GetMapping("/{id}")
+     @GetMapping("/usuario/{id}")
      public ResponseEntity<Usuario> getUsuariosById(@PathVariable Integer id) {
          Optional<Usuario> usuario = usuarioService.getUsuariosById(id);
           if (usuario.isPresent()) {
@@ -62,7 +62,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedUsuario);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/usuario/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Integer id, @RequestBody Usuario usuarioDetails) {
         try {
             Usuario updatedUsuario = usuarioService.updateUsuario((id), usuarioDetails);
@@ -72,7 +72,7 @@ public class UsuarioController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/usuario/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
         try {
             usuarioService.deleteUsuario(id);
