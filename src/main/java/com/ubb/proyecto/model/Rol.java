@@ -5,6 +5,12 @@ import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.*;
 import java.util.List;
 
+
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id_rol"
+)
+
 @Entity
 @Table(name = "rol")
 public class Rol {
