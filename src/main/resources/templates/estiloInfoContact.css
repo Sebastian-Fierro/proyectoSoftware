@@ -8,7 +8,7 @@ body {
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #2325a7;
     color: white;
     text-align: center;
     padding: 1rem 0;
@@ -38,7 +38,7 @@ th, td {
 }
 
 th {
-    background-color: #4CAF50;
+    background-color: #2325a7;
     color: white;
     font-size: 1rem;
 }
@@ -56,7 +56,7 @@ tr:hover {
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #2325a7;
     color: white;
     border: none;
     padding: 5px 10px;
@@ -66,7 +66,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #2325a7;
 }
 
 /* Sección del formulario */
@@ -96,7 +96,7 @@ form input {
 }
 
 form button {
-    background-color: #4CAF50;
+    background-color: #2325a7;
     color: white;
     font-size: 1rem;
     padding: 10px 15px;
@@ -108,12 +108,12 @@ form button {
 }
 
 form button:hover {
-    background-color: #45a049;
+    background-color: #2325a7;
 }
 
 /* Encabezados y títulos */
 h2 {
-    color: #4CAF50;
+    color: #2325a7;
     font-size: 1.3rem;
     margin-top: 20px;
 }
