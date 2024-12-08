@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Podcasts</title>
+    <link rel="stylesheet" href="EditarPodcastsStyle.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Administrar Podcasts</h1>
+        <form id="podcast-form">
+            <input type="text" id="nombre" placeholder="Nombre del Podcast" required>
+            <input type="text" id="tipo" placeholder="Tipo (Ej. Audio)" required>
+            <input type="url" id="url" placeholder="URL del Podcast" required>
+            <button type="submit">Agregar Podcast</button>
+        </form>
+        <div id="podcasts-list"></div>
+    </div>
+
+    <script src="EditarPodcasts.js"></script>
+</body>
+</html>
