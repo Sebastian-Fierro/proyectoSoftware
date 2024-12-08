@@ -8,7 +8,6 @@
     <title>Formulario</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="estiloFormulario.css" />
     <link rel="stylesheet" href="styles.css">
     <script>
       // Código para incluir el header
@@ -16,45 +15,45 @@
           fetch('headerAdmin.html')
               .then(response => response.text())
               .then(data => document.body.insertAdjacentHTML('afterbegin', data));
-          fetch("footer.html")
-                .then(response => response.text())
-                .then(data => document.getElementById("footer-container").innerHTML = data)
-                .catch(err => console.error("Error al cargar el footer:", err));
       });
     </script>
     <title>Crear categoria</title>
 </head>
 
-  <body>
-    <br />
-    <br />
-    <br />
-    <br />
-    <h1>Registro de Categoría</h1>
-    <div class="formbold-main-wrapper">
-      <div class="formbold-form-wrapper">
-        <form>
-          <div class="formbold-input-flex">
-            <div>
-              <input
-                type="text"
-                name="nombre"
-                id="nombre"
-                placeholder="Ingrese nombre de la categoría"
-                class="formbold-form-input"
-              />
-              <label for="nombre" class="formbold-form-label">
-                Nombre categoría
-              </label>
-            </div>
-          </div>
+<body>
+<main>
+    <div class="cuerpo">
+        <br />
+        <br />
+        <br />
+        <br />
+        <h1>Registro de Categoría</h1>
+        <div class="formbold-main-wrapper">
+            <div class="formbold-form-wrapper">
+                <form>
+                    <div class="formbold-input-flex">
+                        <div>
+                            <input
+                                    type="text"
+                                    name="nombre"
+                                    id="nombre"
+                                    placeholder="Ingrese nombre de la categoría"
+                                    class="formbold-form-input"
+                            />
+                            <label for="nombre" class="formbold-form-label">
+                                Nombre categoría
+                            </label>
+                        </div>
+                    </div>
 
-          <button class="formbold-btn" id="btnregistrar">Registrar</button>
-        </form>
-      </div>
+                    <button class="formbold-btn" id="btnregistrar">Registrar</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <script src="formularioCategoria.js"></script>
-    <div id="footer-container"></div>
-  </body>
+
+</main>
+<script src="formularioCategoria.js"></script>
+</body>
 </html>
 

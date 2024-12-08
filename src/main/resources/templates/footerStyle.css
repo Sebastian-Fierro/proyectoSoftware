@@ -16,7 +16,6 @@ footer {
     color: var(--footer-text-color);
     text-align: center;
     padding: var(--footer-padding) 0;
-    position: fixed;
     width: 100%;
     bottom: 0;
 }
