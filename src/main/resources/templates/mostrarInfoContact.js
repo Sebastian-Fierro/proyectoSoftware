@@ -1,17 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Simulación de datos obtenidos del backend
-    const contactData = {
-        correo: "contacto@pagina.com",
-        telefono: "+123 456 789",
-        facebook: "https://facebook.com/paginaOficial",
-        instagram: "https://instagram.com/paginaOficial"
-    };
+    const API_URL = "http://localhost:8080/infoContacto/3"; // Ajusta el ID según sea necesario
 
-    // Rellenar los datos en la página
-    document.getElementById("correo").textContent = contactData.correo;
-    document.getElementById("telefono").textContent = contactData.telefono;
-    document.getElementById("facebook").href = contactData.facebook;
-    document.getElementById("facebook").textContent = "Facebook";
-    document.getElementById("instagram").href = contactData.instagram;
-    document.getElementById("instagram").textContent = "Instagram";
+    fetch(API_URL)
+        .then(response => {
+            if (!response.ok) throw new Error("No se pudo cargar la información.");
+            return response.json();
+        })
+        .then(data => {
+            // Rellenar los datos obtenidos del backend
+            document.getElementById("correo").textContent = data.correo;
+            document.getElementById("telefono").textContent = data.telefono;
+            document.getElementById("facebook").href = data.facebook;
+            document.getElementById("facebook").textContent = "Facebook";
+            document.getElementById("instagram").href = data.instagram;
+            document.getElementById("instagram").textContent = "Instagram";
+        })
+        .catch(error => console.error("Error al cargar la información:", error));
 });
