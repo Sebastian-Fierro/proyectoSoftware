@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Rellenar los datos obtenidos del backend
             document.getElementById("correo").textContent = data.correo || "No disponible";
-            document.getElementById("telefono").textContent = data.telefono || "No disponible";
+            document.getElementById("telefono").textContent = `+ ${data.telefono}` || "No disponible";
             document.getElementById("facebook").href = data.facebook || "#";
             document.getElementById("facebook").textContent = "Facebook";
             document.getElementById("instagram").href = data.instagram || "#";
