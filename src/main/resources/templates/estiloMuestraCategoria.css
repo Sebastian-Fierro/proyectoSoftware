@@ -14,14 +14,14 @@
     line-height: 40px;
     border-collapse: separate;
     border-spacing: 0;
-    border: 2px solid #6A64F1;
+    border: 2px solid #2685c0;
     width: 600px;
     margin: 50px auto;
     border-radius: .25rem;
   }
   
   thead tr:first-child {
-    background: #6A64F1;
+    background: #2685c0;
     color: #fff;
     border: none;
   }
