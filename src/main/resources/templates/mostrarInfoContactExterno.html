@@ -3,8 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiénes Somos - Polo de Salud Región de Ñuble</title>
-    <style>
+    <title>¿Quienes somos?</title>
+    <link rel="stylesheet" href="estiloInfoContact.css">
+    <link rel="stylesheet" href="styles.css" />
+    <script>
+        // Código para incluir el header
+        document.addEventListener("DOMContentLoaded", () => {
+          fetch("header.html")
+            .then((response) => response.text())
+            .then((data) => document.body.insertAdjacentHTML("afterbegin", data));
+          fetch("footer.html")
+            .then((response) => response.text())
+            .then((data) => document.body.insertAdjacentHTML("beforeend", data));
+        });
+      </script>
+      <style>
         body {
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -79,7 +92,7 @@
 </head>
 <body>
     <header>
-        <h1>Quiénes Somos</h1>
+        <h1>¿Quienes somos?</h1>
     </header>
     <section>
         <h2>Nuestra Misión</h2>
@@ -122,11 +135,34 @@
             Contamos con el apoyo de diversas instituciones y organizaciones comprometidas con la salud pública y la educación en la Región de Ñuble.
         </p>
         <div class="collaborators">
-            <img src="images/logo1.png" alt="Logo Universidad del Bío-Bío">
-            <img src="images/logo2.png" alt="Logo Gobierno Regional de Ñuble">
-            <img src="images/logo3.png" alt="Logo Servicio de Salud Ñuble">
-            <img src="images/logo4.png" alt="Logo SEREMI de Salud Ñuble">
+            <a href="https://www.ubiobio.cl/w/"><img src="images/escudo-color-gradiente-oscuro.png" alt="Logo Universidad del Bío-Bío"></a>
+            <a href="https://goredenuble.cl"><img src="images/440946781_764489452541136_3650722408554722990_n.jpg" alt="Logo Gobierno Regional de Ñuble"></a>
+            <a href="https://serviciodesaludnuble.cl/portal/"><img src="images/channels4_profile.jpg" alt="Logo Servicio de Salud Ñuble"></a>
+            <a href="https://www.seremidesaludnuble.cl"><img src="images/SEREMISALUDMET.png" alt="Logo SEREMI de Salud Ñuble"></a>
         </div>
     </section>
+    <main>
+        <section id="contactInfo" class="contact-info">
+            <h2>Contacto</h2>
+            <p><strong>Correo Electrónico:</strong> <span id="correo">contacto@polodesalud.cl</span></p>
+            <p><strong>Teléfono:</strong> <span id="telefono">+56 9 1234 5678</span></p>
+            <p><strong>Redes Sociales:</strong></p>
+            <ul class="social-links">
+                <li>
+                    <a id="facebook" href="#" target="_blank" class="social-link">
+                        <img src="images/ins" alt="Facebook"> Facebook
+                    </a>
+                </li>
+                <li>
+                    <a id="instagram" href="#" target="_blank" class="social-link">
+                        <img src="images/Instagram_logo_2022.svg.png" alt="Instagram"> Instagram
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+    
+    <script src="mostrarInfoContact.js"></script>
 </body>
 </html>
+

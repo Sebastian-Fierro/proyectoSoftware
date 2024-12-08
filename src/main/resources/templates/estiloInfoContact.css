@@ -111,12 +111,55 @@ form button:hover {
     background-color: #1a5a8a;
 }
 
-/* Encabezados y títulos */
-h2 {
-    color: #2685c0;
-    font-size: 1.3rem;
+/* Estilos para la sección de contacto */
+.contact-info {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
     margin-top: 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
+
+.contact-info h2 {
+    font-size: 1.5rem;
+    color: #2685c0;
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    font-size: 1rem;
+    margin: 10px 0;
+}
+
+.contact-info .social-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.contact-info .social-links li a {
+    text-decoration: none;
+    color: #2685c0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contact-info .social-links li a img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.contact-info .social-links li a img:hover {
+    transform: scale(1.1);
+}
+
 
 /* Responsivo para móviles */
 @media (max-width: 768px) {
