@@ -1,41 +1,26 @@
-const API_URL = "/infoContacto"; // Endpoint de la API
+document.getElementById("editContactForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Evita la recarga de la página
 
-// Cargar la información desde el backend
-function loadContactInfo() {
-    fetch(API_URL)
-        .then(response => response.json())
-        .then(data => {
-            // Actualiza los elementos visibles en el HTML
-            document.getElementById("telefono").textContent = data.telefono;
-            document.getElementById("correo").textContent = data.correo;
-            document.getElementById("facebook").href = data.facebook;
-            document.getElementById("facebook").textContent = "Visitar Facebook";
-        })
-        .catch(error => console.error("Error cargando información de contacto:", error));
-}
-
-// Manejar la edición y actualización (PUT)
-document.getElementById("editContactForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
+    // Recopilar los datos del formulario
     const updatedContact = {
-        telefono: document.getElementById("newTelefono").value || undefined,
-        correo: document.getElementById("newCorreo").value || undefined,
-        facebook: document.getElementById("newFacebook").value || undefined,
+        correo: document.getElementById("correo").value,
+        telefono: document.getElementById("telefono").value,
+        facebook: document.getElementById("facebook").value,
+        instagram: document.getElementById("instagram").value
     };
 
-    fetch(API_URL, {
+    // Enviar los datos al backend (simulación de solicitud)
+    fetch("http://localhost:8080/infoContacto/update", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedContact)
     })
-        .then(response => response.json())
-        .then(data => {
-            alert("Información actualizada exitosamente.");
-            loadContactInfo(); // Recargar los datos
+        .then(response => {
+            if (response.ok) {
+                alert("Información actualizada correctamente.");
+            } else {
+                alert("Error al actualizar la información.");
+            }
         })
-        .catch(error => console.error("Error actualizando información:", error));
+        .catch(error => console.error("Error:", error));
 });
-
-// Carga inicial de datos
-document.addEventListener("DOMContentLoaded", loadContactInfo);
