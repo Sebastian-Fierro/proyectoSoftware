@@ -38,7 +38,7 @@ public class RolController {
         return ResponseEntity.status(HttpStatus.CREATED).body(savedRol);
     }
 
-     @PutMapping("/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Rol> updateRol(@PathVariable Integer id, @RequestBody Rol rolDetails) {
         try {
             Rol updatedRol = rolService.updateRol(id, rolDetails);
