@@ -17,11 +17,8 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_user;
-
     private String nombre;
-
     private String contraseña;
-
     private String correo;
 
     @Temporal(TemporalType.TIMESTAMP)

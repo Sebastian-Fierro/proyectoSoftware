@@ -68,7 +68,9 @@ public class UsuarioService {
         return false;
     }
 
-    public Usuario loginUsuario(Usuario usuario) {
-        return usuarioRepository.findByCorreoAndContraseña(usuario.getCorreo(), usuario.getContraseña());
+     // Autenticación de usuario (login)
+     public Usuario getUsuarioByCorreoAndContraseña(String correo, String contraseña) {
+        
+        return usuarioRepository.findByCorreoAndContraseña(correo, contraseña);
     }
 }
