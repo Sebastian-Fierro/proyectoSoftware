@@ -10,10 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id_user"
-)
+
 @Entity
 @Table(name = "usuario")
 public class Usuario {

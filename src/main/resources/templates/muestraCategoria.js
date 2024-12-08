@@ -2,11 +2,9 @@ window.onload = function(){
     listarCategorias();
 };
 
-<<<<<<< HEAD
-//OBTIENE PELICULAS
-=======
+
 //OBTIENE CATEGORIAS
->>>>>>> master
+
 let listarCategorias = async()=>{
     const peticion = await fetch("http://localhost:8080/categorias",
     {
