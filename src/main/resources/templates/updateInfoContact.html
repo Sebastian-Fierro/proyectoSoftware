@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actualizar Información de Contacto</title>
     <link rel="stylesheet" href="estiloInfoContact.css">
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Código para incluir el header
+            fetch('headerAdmin.html')
+                .then(response => response.text())
+                .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+
+            // Código para incluir el header
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => document.getElementById("footer-container").innerHTML = data)
+                .catch(err => console.error("Error al cargar el footer:", err));
+        });
+    </script>
 </head>
 <body>
     <header>
@@ -27,6 +42,8 @@
             <button type="submit">Guardar Cambios</button>
         </form>
     </main>
-    <script src="updateInfoContact.html"></script>
+    <script src="updateInfoContact.js"></script>
+    <div id="footer-container"></div>
 </body>
+
 </html>
