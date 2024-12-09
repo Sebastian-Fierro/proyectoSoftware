@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Usuario</title>
+  <style>
+    /* Estilos generales */
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f7fa;
+    }
+
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    /* Estilos para el formulario */
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Estilo para los mensajes de error */
+    .error {
+      color: red;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* Estilo para la lista de usuarios */
+    #userList {
+      margin-bottom: 20px;
+      max-height: 150px;
+      overflow-y: auto;
+    }
+
+    #userList li {
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+
+    #userList li:hover {
+      background-color: #f0f0f0;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Editar Usuario</h2>
+    
+    <!-- Lista de usuarios -->
+    <div>
+      <h3>Seleccionar Usuario</h3>
+      <ul id="userList"></ul>
+    </div>
+
+    <form id="editUserForm">
+      <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required disabled>
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo</label>
+        <input type="email" id="correo" name="correo" required disabled>
+      </div>
+      <div class="form-group">
+        <label for="contraseña">Contraseña</label>
+        <input type="password" id="contraseña" name="contraseña" required disabled>
+      </div>
+      <div class="form-group">
+        <button type="submit" disabled>Actualizar Usuario</button>
+      </div>
+      <div class="error" id="errorMessage"></div>
+    </form>
+  </div>
+
+  <script>
+
+
+    // Cargar la lista de usuarios
+    async function loadUsers() {
+      try {
+        const response = await fetch('http://localhost:8080/usuario');
+        const users = await response.json();
+        const userList = document.getElementById('userList');
+        userList.innerHTML = ''; // Limpiar la lista actual
+
+        // Llenar la lista con los usuarios
+        users.forEach(user => {
+          const listItem = document.createElement('li');
+          listItem.textContent = `${user.nombre} - ${user.correo}`;
+          listItem.onclick = () => loadUserData(user.id_user); // Asocia el click al cargar datos
+          userList.appendChild(listItem);
+        });
+      } catch (error) {
+        console.error('Error al cargar la lista de usuarios:', error);
+      }
+    }
+
+    // Cargar los datos del usuario seleccionado
+    async function loadUserData(id) {
+      try {
+        const response = await fetch(`http://localhost:8080/usuario/usuario/${id}`);
+        const user = await response.json();
+        document.getElementById('nombre').value = user.nombre;
+        document.getElementById('correo').value = user.correo;
+        document.getElementById('contraseña').value = user.contraseña;
+
+        // Habilitar el formulario y el botón de actualizar
+        document.getElementById('nombre').disabled = false;
+        document.getElementById('correo').disabled = false;
+        document.getElementById('contraseña').disabled = false;
+        document.querySelector('button').disabled = false;
+
+        // Guardar el ID del usuario para actualizar
+        document.getElementById('editUserForm').onsubmit = function (e) {
+          e.preventDefault();
+          updateUser(id);
+        };
+      } catch (error) {
+        console.error('Error al cargar los datos del usuario:', error);
+      }
+    }
+
+    // Actualizar los datos del usuario
+    async function updateUser(id) {
+      const nombre = document.getElementById('nombre').value;
+      const correo = document.getElementById('correo').value;
+      const contraseña = document.getElementById('contraseña').value;
+
+      const usuarioData = {
+        nombre: nombre,
+        correo: correo,
+        contraseña: contraseña,
+        created_at: "", // Si el campo 'created_at' no debe ser actualizado
+        rol: {
+          id_rol: 19, // Asumiendo que el rol no cambia
+        }
+      };
+
+      try {
+        // Realizar la solicitud PUT
+        const response = await fetch(`http://localhost:8080/usuario/usuario/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(usuarioData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Error al actualizar el usuario');
+        }
+
+        const updatedUser = await response.json();
+        alert('Usuario actualizado con éxito');
+        loadUsers(); // Volver a cargar la lista de usuarios
+        resetForm(); // Limpiar el formulario
+      } catch (error) {
+        document.getElementById('errorMessage').textContent = error.message;
+      }
+    }
+
+    // Limpiar el formulario
+    function resetForm() {
+      document.getElementById('editUserForm').reset();
+      document.getElementById('nombre').disabled = true;
+      document.getElementById('correo').disabled = true;
+      document.getElementById('contraseña').disabled = true;
+      document.querySelector('button').disabled = true;
+      document.getElementById('errorMessage').textContent = '';
+    }
+
+    // Cargar la lista de usuarios al inicio
+    window.onload = loadUsers;
+  </script>
+
+</body>
+</html>
+
