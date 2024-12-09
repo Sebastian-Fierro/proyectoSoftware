@@ -9,9 +9,6 @@ import java.util.List;
 @Table(name = "comentario")
 public class Comentario {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_comentario")

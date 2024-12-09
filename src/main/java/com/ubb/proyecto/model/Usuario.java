@@ -38,14 +38,17 @@ public class Usuario {
             inverseJoinColumns = @JoinColumn(name = "id_comp"))
     private List<Componentes> componentes;
 
-    @ManyToMany
-    @JoinTable(name = "usuariomultimedia", joinColumns = @JoinColumn(name = "id_user"),
-            inverseJoinColumns = @JoinColumn(name = "id_mult"))
-    private List<Multimedia> multimedia;
-
     @ManyToMany(mappedBy = "usuarios")
     private List<Evento> eventos;
 */
+    @ManyToMany
+    @JoinTable(
+        name = "usuariomultimedia", 
+        joinColumns = @JoinColumn(name = "id_user"), 
+        inverseJoinColumns = @JoinColumn(name = "id_mult")
+    )
+    private List<Multimedia> multimedia;
+
     @ManyToMany(mappedBy = "usuarios")
     @JsonBackReference
     private Set<Noticia> noticias = new HashSet<>();
@@ -119,14 +122,6 @@ public class Usuario {
         this.componentes = componentes;
     }
 
-    public List<Multimedia> getMultimedia() {
-        return multimedia;
-    }
-
-    public void setMultimedia(List<Multimedia> multimedia) {
-        this.multimedia = multimedia;
-    }
-
     public List<Evento> getEventos() {
         return eventos;
     }
@@ -135,6 +130,15 @@ public class Usuario {
         this.eventos = eventos;
     }
 */
+
+    public List<Multimedia> getMultimedia() {
+        return multimedia;
+    }
+
+    public void setMultimedia(List<Multimedia> multimedia) {
+        this.multimedia = multimedia;
+    }
+
     public Set<Noticia> getNoticias() {
         return noticias;
     }
