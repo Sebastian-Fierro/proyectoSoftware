@@ -1,67 +1,69 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const multimediaForm = document.getElementById('multimedia-form');
-    multimediaForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const nombre = document.getElementById('nombre').value;
-        const tipo = document.getElementById('tipo').value;
-        const url = document.getElementById('url').value;
-
-        fetch('/multimedia', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                nombre: nombre,
-                tipo: tipo,
-                url: url
-            })
-        })
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('/multimedia')
         .then(response => response.json())
         .then(data => {
-            alert('Contenido multimedia agregado exitosamente');
-            loadMultimedia();
+            const multimediaList = document.getElementById('multimedia-list');
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('multimedia-item');
+                div.innerHTML = `
+                    <h3>${item.nombre}</h3>
+                    <p>Tipo: ${item.tipo}</p>
+                    <a href="${item.url}" target="_blank">Ver contenido</a>
+                    <button onclick="editMultimedia(${item.idMult})">Editar</button>
+                    <button onclick="deleteMultimedia(${item.idMult})">Eliminar</button>
+                `;
+                multimediaList.appendChild(div);
+            });
         })
-        .catch(error => console.error('Error al agregar contenido multimedia:', error));
-    });
-
-    function loadMultimedia() {
-        fetch('/multimedia')
-            .then(response => response.json())
-            .then(data => {
-                const multimediaList = document.getElementById('multimedia-list');
-                multimediaList.innerHTML = '';
-                data.forEach(item => {
-                    const multimediaItem = document.createElement('div');
-                    multimediaItem.classList.add('multimedia-item');
-                    multimediaItem.innerHTML = `
-                        <h2>${item.nombre}</h2>
-                        <p>Tipo: ${item.tipo}</p>
-                        <a href="${item.url}" target="_blank">Ver Contenido</a>
-                        <button onclick="editMultimedia(${item.idMult})">Editar</button>
-                        <button onclick="deleteMultimedia(${item.idMult})">Eliminar</button>
-                    `;
-                    multimediaList.appendChild(multimediaItem);
-                });
-            })
-            .catch(error => console.error('Error al cargar los contenidos multimedia:', error));
-    }
-
-    function editMultimedia(id) {
-        // Implementar la lógica de edición del contenido multimedia
-    }
-
-    function deleteMultimedia(id) {
-        fetch(`/multimedia/${id}`, {
-            method: 'DELETE'
-        })
-        .then(() => {
-            alert('Contenido multimedia eliminado');
-            loadMultimedia();
-        })
-        .catch(error => console.error('Error al eliminar contenido multimedia:', error));
-    }
-
-    loadMultimedia();
+        .catch(error => console.error('Error fetching multimedia:', error));
 });
+
+function editMultimedia(id) {
+    const newName = prompt('Introduce el nuevo nombre del contenido:');
+    const newUrl = prompt('Introduce la nueva URL del contenido:');
+    const newType = prompt('Introduce el nuevo tipo del contenido (podcast, video, etc.):');
+    
+    if (newName && newUrl && newType) {
+        fetch(`/multimedia/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sessionStorage.getItem('token')}` // Asumiendo que el token se guarda en sessionStorage
+            },
+            body: JSON.stringify({
+                nombre: newName,
+                tipo: newType,
+                url: newUrl
+            })
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Contenido actualizado correctamente');
+                location.reload();
+            } else {
+                alert('Error al actualizar el contenido');
+            }
+        })
+        .catch(error => console.error('Error al editar multimedia:', error));
+    }
+}
+
+function deleteMultimedia(id) {
+    fetch(`/multimedia/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sessionStorage.getItem('token')}` // Asumiendo que el token se guarda en sessionStorage
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            alert('Multimedia eliminado correctamente');
+            location.reload();
+        } else {
+            alert('Error al eliminar multimedia');
+        }
+    })
+    .catch(error => console.error('Error al eliminar multimedia:', error));
+}

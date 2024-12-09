@@ -1,18 +1,18 @@
-document.addEventListener('DOMContentLoaded', function() {
-    fetch('/api/podcasts')
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('/multimedia')
         .then(response => response.json())
         .then(data => {
-            const podcastsList = document.getElementById('podcasts-list');
-            data.forEach(podcast => {
-                const podcastItem = document.createElement('div');
-                podcastItem.classList.add('podcast-item');
-                podcastItem.innerHTML = `
-                    <h2>${podcast.nombre}</h2>
-                    <p>${podcast.tipo}</p>
-                    <a href="${podcast.url}" target="_blank">Escuchar Podcast</a>
+            const multimediaList = document.getElementById('multimedia-list');
+            data.forEach(item => {
+                const div = document.createElement('div');
+                div.classList.add('multimedia-item');
+                div.innerHTML = `
+                    <h3>${item.nombre}</h3>
+                    <p>Tipo: ${item.tipo}</p>
+                    <a href="${item.url}" target="_blank">Ver contenido</a>
                 `;
-                podcastsList.appendChild(podcastItem);
+                multimediaList.appendChild(div);
             });
         })
-        .catch(error => console.error('Error al cargar los podcasts:', error));
+        .catch(error => console.error('Error fetching multimedia:', error));
 });
