@@ -1,19 +1,35 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contenido Multimedia</title>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="PodcastsStyles.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Código para incluir el header
+            fetch('header.html')
+                .then(response => response.text())
+                .then(data => document.body.insertAdjacentHTML('afterbegin', data));
+                
+            // Código para incluir el footer
+            fetch("footer.html")
+                .then(response => response.text())
+                .then(data => document.body.insertAdjacentHTML('beforeend', data))
+                .catch(err => console.error("Error al cargar el footer:", err));
+        });
+    </script>
 </head>
 <body>
-    <div id="content">
-        <h2>Contenido Multimedia</h2>
-        <div id="multimedia-list">
-            <!-- El contenido multimedia se cargará aquí -->
+    <main>
+        <div id="content">
+            <h2>Contenidos Multimedias</h2>
+            <div id="multimedia-list">
+                <!-- El contenido multimedia se cargará aquí -->
+            </div>
         </div>
-    </div>
-
+    </main>
     <script src="Podcasts.js"></script>
 </body>
 </html>
