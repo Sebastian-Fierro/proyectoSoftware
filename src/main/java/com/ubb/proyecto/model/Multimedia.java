@@ -2,7 +2,7 @@ package com.ubb.proyecto.model;
 
 import jakarta.persistence.*;
 
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "multimedia")
@@ -17,14 +17,19 @@ public class Multimedia {
     private String nombre;
 
     @Column(name = "tipo", nullable = false, length = 20)
-    private String tipo;
+    private String tipo; //Tipo de contenido multimedia (Podcast, Entrevista, etc.)
 
     @Column(name = "url", nullable = false)
     private String url;
-/*
-    @ManyToMany(mappedBy = "multimedia")
+
+    @ManyToMany
+    @JoinTable(
+        name = "usuariomultimedia", 
+        joinColumns = @JoinColumn(name = "id_mult"), 
+        inverseJoinColumns = @JoinColumn(name = "id_user")
+    )   
     private List<Usuario> usuarios;
-*/
+    
     // Getters and Setters
 
     public int getIdMult() {
@@ -58,4 +63,12 @@ public class Multimedia {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }    
 }
