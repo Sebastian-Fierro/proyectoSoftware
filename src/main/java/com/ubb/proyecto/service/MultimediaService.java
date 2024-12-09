@@ -24,6 +24,7 @@ public class MultimediaService {
             throw new RuntimeException("Tipo de multimedia es obligatorio");
         }
         return repositorioMultimedia.save(multimedia);
+        
     }
 
     public Multimedia updateMultimedia(int id, Multimedia multimedia) {
@@ -42,4 +43,14 @@ public class MultimediaService {
     public void deleteMultimedia(int id) {
         repositorioMultimedia.deleteById(id);
     }
+
+    /*public boolean isValidURL(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }*/
+    
 }
