@@ -14,8 +14,16 @@ public class MultimediaService {
     @Autowired
     private RepositorioMultimedia repositorioMultimedia;
 
+    public MultimediaService(RepositorioMultimedia repositorioMultimedia) {
+        this.repositorioMultimedia = repositorioMultimedia;
+    }
+
     public List<Multimedia> getAllMultimedia() {
         return repositorioMultimedia.findAll();
+    }
+
+    public Optional<Multimedia> getMultimediaById(Integer id) {
+        return repositorioMultimedia.findById(id);
     }
 
     public Multimedia addMultimedia(Multimedia multimedia) {
@@ -24,6 +32,7 @@ public class MultimediaService {
             throw new RuntimeException("Tipo de multimedia es obligatorio");
         }
         return repositorioMultimedia.save(multimedia);
+        
     }
 
     public Multimedia updateMultimedia(int id, Multimedia multimedia) {
@@ -39,7 +48,25 @@ public class MultimediaService {
         }
     }
 
-    public void deleteMultimedia(int id) {
-        repositorioMultimedia.deleteById(id);
+    public boolean deleteMultimedia(Integer id) {
+        if (repositorioMultimedia.existsById(id)) {
+            repositorioMultimedia.deleteById(id);
+            return true;
+        }
+        return false;
     }
+    
+    /*public void deleteMultimedia(int id) {
+        repositorioMultimedia.deleteById(id);
+    }*/
+
+    /*public boolean isValidURL(String url) {
+        try {
+            new URL(url).toURI();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }*/
+    
 }

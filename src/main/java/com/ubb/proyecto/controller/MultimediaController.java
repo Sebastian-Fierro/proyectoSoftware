@@ -3,10 +3,11 @@ package com.ubb.proyecto.controller;
 import com.ubb.proyecto.model.Multimedia;
 import com.ubb.proyecto.service.MultimediaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -17,13 +18,19 @@ public class MultimediaController {
     private MultimediaService multimediaService;
 
     // GET: obtener todos los contenidos multimedia
-    @GetMapping
+    @GetMapping("")
     public List<Multimedia> getAllMultimedia() {
         return multimediaService.getAllMultimedia();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Multimedia> getMultimediaById(@PathVariable Integer id) {
+        Optional<Multimedia> multimedia = multimediaService.getMultimediaById(id);
+        return multimedia.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
     // POST: agregar un nuevo contenido multimedia (audio, video, etc.)
-    @PostMapping("/agregar/id")
+    @PostMapping("/agregar")
     public ResponseEntity<Multimedia> addMultimedia(@RequestBody Multimedia multimedia) {
         Multimedia createdMultimedia = multimediaService.addMultimedia(multimedia);
         return ResponseEntity.status(201).body(createdMultimedia);
