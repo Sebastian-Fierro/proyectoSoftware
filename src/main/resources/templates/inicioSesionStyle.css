@@ -99,6 +99,22 @@ button:hover {
     display: none;
 }
 
+button.secondary-button {
+    background-color: #f8f9fa;
+    color: #333;
+    padding: 12px 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  button.secondary-button:hover {
+    background-color: #e2e6ea;
+  }
+
 /* Animaciones */
 @keyframes fadeIn {
     from {
