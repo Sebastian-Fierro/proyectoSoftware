@@ -29,17 +29,14 @@ public class InfoContactController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<InfoContact> /*getInfoContactById*/getSingleInfoContact(@PathVariable Integer id){
-        Optional<InfoContact> infoContacto = infoContactService.getInfoContactById(id)/*getSingleInfoContact()*/;
+    public ResponseEntity<InfoContact>getSingleInfoContact(@PathVariable Integer id){
+        Optional<InfoContact> infoContacto = infoContactService.getInfoContactById(id);
         return infoContacto.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PostMapping("/insert/{id_user}")
-    public ResponseEntity</*InfoContact*/?> createInfoContact(@PathVariable Integer id_user, @RequestBody InfoContact infoContact){
-        //InfoContact createdInfoContact = infoContactService.createInfoContact(infoContact); definir createInfoContact en service pa k funcione
-        //return new ResponseEntity<>(createdInfoContact, HttpStatus.CREATED);
-        
-        //Optional<InfoContact> existingContact = infoContactService.getSingleInfoContact();
+    public ResponseEntity<?> createInfoContact(@PathVariable Integer id_user, @RequestBody InfoContact infoContact){
+
         Optional<InfoContact> existingContact = infoContactService.getInfoContactById(infoContact.getIdContact());
         if (existingContact.isPresent()) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Ya existe un registro de InfoContact. Solo puedes actualizarlo.");

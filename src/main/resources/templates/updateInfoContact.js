@@ -1,7 +1,7 @@
 document.getElementById("updateForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Evita la recarga de la página
 
-    const API_URL = "http://localhost:8080/infoContacto/update/3"; // Reemplaza "1" con el ID correspondiente.
+    const API_URL = "http://localhost:8080/infoContacto/update/3";
 
     // Recopilar los datos del formulario
     const updatedContact = {
@@ -27,7 +27,7 @@ document.getElementById("updateForm").addEventListener("submit", function (event
         .catch(error => console.error("Error:", error));
 
         document.addEventListener("DOMContentLoaded", function () {
-            const API_URL = "http://localhost:8080/infoContacto/3"; // Reemplaza "1" con el ID correspondiente.
+            const API_URL = "http://localhost:8080/infoContacto/3";
         
             fetch(API_URL)
                 .then(response => {

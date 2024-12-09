@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RepositorioInfoContact extends JpaRepository<InfoContact, Integer> {
 
-    //Optional<InfoContact> findBycorreo(String correo);
     Optional<InfoContact> findFirstByOrderByIdContactAsc();
-
-    //InfoContact save(String correo);
 }
 

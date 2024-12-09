@@ -23,13 +23,9 @@ public class InfoContactService {
     public Optional<InfoContact> getInfoContactById(Integer id) {
         return infoContactRepository.findById(id);
     }
-    /*public Optional<InfoContact> getSingleInfoContact() {
-        return infoContactRepository.findFirstByOrderByIdContactAsc();
-    }*/
 
     public InfoContact saveInfoContact(InfoContact infoContact/*, Integer id_user*/){
-        /*Usuario usuario = usuarioService.getUsuariosById(id_user).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        infoContact.setcambio(usuario);*/
+
         if (infoContact.getCorreo() == null || infoContact.getTelefono() == null) {
             throw new IllegalArgumentException("Los campos 'correo' y 'telefono' son obligatorios.");
         }
@@ -41,17 +37,6 @@ public class InfoContactService {
         infoContact.setUpdated_by(usuario);
         return infoContactRepository.save(infoContact);
     }
-
-   //Solo actualiza correo?
-    /*public InfoContact updateInfoContact(Integer id, InfoContact InfoContactDetails) {
-        InfoContact infoContact = infoContactRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Contacto no encontrado"));
-
-        infoContact.setCorreo(InfoContactDetails.getCorreo());
-
-
-        return infoContactRepository.save(infoContact);
-    }*/
 
     public InfoContact updateInfoContact(Integer id, InfoContact newInfoContact) {
         InfoContact existingContact = infoContactRepository.findById(id).orElseThrow(() -> new RuntimeException("InfoContact no encontrado."));
@@ -65,7 +50,6 @@ public class InfoContactService {
         existingContact.setTelefono(newInfoContact.getTelefono());
         existingContact.setInstagram(newInfoContact.getInstagram());
         existingContact.setFacebook(newInfoContact.getFacebook());
-        //existingContact.setUpdated_by(newInfoContact.getUpdated_by()); comentado porque está lo de arriba
         return infoContactRepository.save(existingContact);
     }
 
