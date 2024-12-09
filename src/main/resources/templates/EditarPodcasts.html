@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Podcasts</title>
+    <title>Administrar Contenido Multimedia</title>
     <link rel="stylesheet" href="EditarPodcastsStyle.css">
 </head>
 <body>
     <div class="container">
-        <h1>Administrar Podcasts</h1>
-        <form id="podcast-form">
-            <input type="text" id="nombre" placeholder="Nombre del Podcast" required>
-            <input type="text" id="tipo" placeholder="Tipo (Ej. Audio)" required>
-            <input type="url" id="url" placeholder="URL del Podcast" required>
-            <button type="submit">Agregar Podcast</button>
+        <h1>Administrar Contenido Multimedia</h1>
+        <form id="multimedia-form">
+            <input type="text" id="nombre" placeholder="Nombre del Contenido" required>
+            <select id="tipo" required>
+                <option value="Podcast">Podcast</option>
+                <option value="Entrevista">Entrevista</option>
+                <option value="Video">Video</option>
+            </select>
+            <input type="url" id="url" placeholder="URL del Contenido" required>
+            <button type="submit">Agregar Contenido</button>
         </form>
-        <div id="podcasts-list"></div>
+        <div id="multimedia-list"></div>
     </div>
 
-    <script src="EditarPodcasts.js"></script>
+    <script src="editarNoticias.js"></script>
 </body>
 </html>

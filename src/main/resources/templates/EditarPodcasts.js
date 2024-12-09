@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const podcastForm = document.getElementById('podcast-form');
-    podcastForm.addEventListener('submit', function(event) {
+    const multimediaForm = document.getElementById('multimedia-form');
+    multimediaForm.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const nombre = document.getElementById('nombre').value;
         const tipo = document.getElementById('tipo').value;
         const url = document.getElementById('url').value;
 
-        fetch('/api/podcasts', {
+        fetch('/multimedia', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -20,31 +20,48 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            alert('Podcast agregado exitosamente');
-            loadPodcasts();
+            alert('Contenido multimedia agregado exitosamente');
+            loadMultimedia();
         })
-        .catch(error => console.error('Error al agregar podcast:', error));
+        .catch(error => console.error('Error al agregar contenido multimedia:', error));
     });
 
-    function loadPodcasts() {
-        fetch('/api/podcasts')
+    function loadMultimedia() {
+        fetch('/multimedia')
             .then(response => response.json())
             .then(data => {
-                const podcastsList = document.getElementById('podcasts-list');
-                podcastsList.innerHTML = '';
-                data.forEach(podcast => {
-                    const podcastItem = document.createElement('div');
-                    podcastItem.classList.add('podcast-item');
-                    podcastItem.innerHTML = `
-                        <h2>${podcast.nombre}</h2>
-                        <p>${podcast.tipo}</p>
-                        <a href="${podcast.url}" target="_blank">Escuchar Podcast</a>
+                const multimediaList = document.getElementById('multimedia-list');
+                multimediaList.innerHTML = '';
+                data.forEach(item => {
+                    const multimediaItem = document.createElement('div');
+                    multimediaItem.classList.add('multimedia-item');
+                    multimediaItem.innerHTML = `
+                        <h2>${item.nombre}</h2>
+                        <p>Tipo: ${item.tipo}</p>
+                        <a href="${item.url}" target="_blank">Ver Contenido</a>
+                        <button onclick="editMultimedia(${item.idMult})">Editar</button>
+                        <button onclick="deleteMultimedia(${item.idMult})">Eliminar</button>
                     `;
-                    podcastsList.appendChild(podcastItem);
+                    multimediaList.appendChild(multimediaItem);
                 });
             })
-            .catch(error => console.error('Error al cargar los podcasts:', error));
+            .catch(error => console.error('Error al cargar los contenidos multimedia:', error));
     }
 
-    loadPodcasts();
+    function editMultimedia(id) {
+        // Implementar la lógica de edición del contenido multimedia
+    }
+
+    function deleteMultimedia(id) {
+        fetch(`/multimedia/${id}`, {
+            method: 'DELETE'
+        })
+        .then(() => {
+            alert('Contenido multimedia eliminado');
+            loadMultimedia();
+        })
+        .catch(error => console.error('Error al eliminar contenido multimedia:', error));
+    }
+
+    loadMultimedia();
 });
